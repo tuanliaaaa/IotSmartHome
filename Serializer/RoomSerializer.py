@@ -8,3 +8,4 @@ class RoomSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'id': {'read_only': True}
         }
+

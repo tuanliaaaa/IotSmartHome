@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from Entity.models.Sensor import Sensor
 
+from django.db import transaction
+from Entity.models.Sensor import Sensor
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
@@ -8,3 +9,4 @@ class SensorSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'id': {'read_only': True}
         }
+
