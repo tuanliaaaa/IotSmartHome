@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Cpon</title>
+      <link rel="stylesheet" href="login.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div id="container">
+         <div class="content">
+            <header>Login Form</header>
+            <form action="#">
+               <div class="field">
+                  <span class="fa fa-user"></span>
+                  <input type="text" required placeholder="Username" id="Username" onkeyup="loginByEnter()">
+               </div>
+               <div class="field space">
+                  <span class="fa fa-lock"></span>
+                  <input type="password" class="pass-key" required placeholder="Password" id="Password" onkeyup="loginByEnter()">
+                  
+               </div>
+               <div class="pass">
+                  <a href="#">Forgot Password?</a>
+               </div>
+               <div class="field">
+                  <input type="button" value="LOGIN" onclick="login()">
+               </div>
+            </form>
+            <div id="error_login">
+               <div id="error"></div>
+            </div>
+
+            <div class="signup">
+               Don't have account?
+               <a href="#">Signup Now</a>
+            </div>
+         </div>
+      </div>
+      <script src="../static/js/login.js">
+      </script>
+   </body>
+</html>

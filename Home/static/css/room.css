@@ -1,0 +1,221 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    max-height: 100%;
+}
+#navbar{
+    position: relative;
+    left: 0;
+    top:0;
+    height: 0vh;
+    z-index: 100;
+   right: 0;
+}
+#navbar.unshow{
+    height: 100vh;
+}
+.menu-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 100;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+.menu-button.hidden{
+    display: none;
+}
+.navigation {
+    position: absolute;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+.navigation .nav__header{
+    border-bottom: 1px solid white;
+
+}
+.nav__header h3{
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+    text-transform: uppercase;
+}
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navigation ul li {
+    padding: 10px;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+.navigation ul li a.activeNab{
+    color: black;
+}
+.navigation ul li a:hover{
+    color: black;
+}
+#main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('background.jpg'); /* Thay đổi 'background.jpg' thành đường dẫn ảnh nền của bạn */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+#main-content .header{
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.header .header__title{
+    margin-right: 50%;
+    transform:  translateX(140%);
+}
+.header__title h2{
+    color: white;
+   
+}
+.header .header__nav{
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.header__nav p{
+    text-align: center;
+    color: white;
+    margin-right: 40px;
+    cursor: pointer;
+    font-size: 18px;
+}
+.header__nav p:hover{
+    text-decoration: underline;
+    
+}
+#container{
+
+}
+#container .container__content{
+    width: 90%;
+    margin: auto;
+    
+}
+
+.container__content .dht{
+    margin-top: 10px;
+    display: flex;
+    padding-right: 20px;
+    justify-content: end;
+    color: white;
+}
+.dht .dht__item{
+    display: flex;
+    align-items: center;
+    
+}
+.dht__item .img__dht{
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+.img__dht img{
+    width: 100%;
+    height: 100%;
+}
+.dht__item .dht__content{
+
+}
+.dht__content p{
+
+}
+.container__content .content__control{
+    border: 1px solid  rgba(255, 255, 255, 0.4);
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5);
+    flex-grow: 1;
+    
+    border-radius: 5px;
+    height: 80vh;
+    overflow-y: scroll;
+   
+    margin-top: 5px;
+}
+::-webkit-scrollbar {
+    width: 0;
+  }
+.content__control .listRoom{
+
+}
+.listRoom ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.listRoom ul li{
+    width: 20%;
+    padding: 20px;
+}
+ul li .roomDetail{
+    border: 1px solid white;
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5);
+    background-color: white;
+    border-radius: 10%;
+    cursor: pointer;
+    
+}
+.roomDetail .roomDetail__logo{
+    position: relative;
+}
+.roomDetail__logo .logo__content{
+    padding-bottom:90% ;
+    
+}
+.roomDetail__logo .logo__img{
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+}
+.logo__img img{
+    height: 100%;
+    width: 100%;
+    border-top-right-radius: 10%;
+    border-top-left-radius: 10%;
+    object-fit: cover;
+}
+.roomDetail .roomDetail__content{
+
+}
+.roomDetail__content p{
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    padding: 5px;
+}
