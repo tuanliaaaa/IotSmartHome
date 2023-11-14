@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // Tạo một đối tượng WebSocket và kết nối đến đường dẫn WebSocket của Binance
+const socket = new WebSocket('wss://stream.binance.com:9443/ws/etheur@trade');
+
+// Xử lý sự kiện kết nối mở
+socket.addEventListener('open', (event) => {
+  console.log('Kết nối WebSocket đã mở:', event);
+  // Bạn có thể gửi dữ liệu đến máy chủ ở đây nếu cần
+  // socket.send('Xin chào, máy chủ!');
+});
+
+// Xử lý các tin nhắn đến từ máy chủ
+socket.addEventListener('message', (event) => {
+  const message = event.data;
+  console.log('Nhận tin nhắn từ máy chủ:', message);
+  // Xử lý tin nhắn nhận được
+});
+
+// Xử lý sự kiện kết nối đóng
+socket.addEventListener('close', (event) => {
+  console.log('Kết nối WebSocket đã đóng:', event);
+});
+
+// Xử lý lỗi
+socket.addEventListener('error', (event) => {
+  console.error('Lỗi WebSocket:', event);
+});
+
+// Để gửi dữ liệu đến máy chủ
+// socket.send('Dữ liệu để gửi');
+
+// Để đóng kết nối WebSocket
+// socket.close();
+
+</script>
+</html>
