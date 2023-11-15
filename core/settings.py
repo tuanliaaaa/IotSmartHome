@@ -57,7 +57,7 @@ MIDDLEWARE = [
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 ROOT_URLCONF = 'core.urls'
-
+BACKGROUND_TASK_RUN_ASYNC=True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
