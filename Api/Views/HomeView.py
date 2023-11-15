@@ -7,16 +7,14 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 
 class HomeByUserId(APIView):
-    def get(self,request,id):
+    def get(self,request,userID):
         try:
-            home = Home.objects.filter(pk=id)
-            homeList = []
-            for i in home:
-                homeList.append(i)
-            homeSerializer = HomeSerializer(homeList,many = True)
-            return Response(homeSerializer.data,status=200)
+            homeList = Home.objects.filter(User_pk=userID)
         except:
             return Response({"massage":"Nhà không tồn tại"},status=204)
+        homeListSerializer = HomeSerializer(homeList,many = True)
+        return Response(homeListSerializer.data,status=200)
+    
 
     
         

@@ -7,16 +7,13 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 
 class RoomByHomeId(APIView):
-    def get(self,request,id):
+    def get(self,request,homeID):
         try:
-            room = Room.objects.filter(pk=id)
-            roomList = []
-            for i in room:
-                roomList.append(i)
-            roomSerializer = RoomSerializer(roomList,many = True)
-            return Response(roomSerializer.data,status=200)
+            roomList = Room.objects.filter(Home_pk=homeID)
         except:
             return Response({"massage":"Phòng không tồn tại"},status=204)
+        roomListSerializer = RoomSerializer(roomList,many = True)
+        return Response(roomListSerializer.data,status=200)
 
     
         
