@@ -1,1 +1,1 @@
-from . import User,Role,UserRole,Home,Room,Equipment,Sensor,Clock
+from . import User,Role,UserRole,Home,Room,Equipment,Sensor,Clock,History
