@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'iotsmarthome',  
+        'NAME': 'iot2',  
         'USER': 'root',  
-        'PASSWORD': '22122002',  
+        'PASSWORD': '18012002',  
         'HOST': '127.0.0.1',  
         'PORT': '3306',  
         'OPTIONS': {  

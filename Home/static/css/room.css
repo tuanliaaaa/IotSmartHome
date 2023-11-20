@@ -81,7 +81,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('background.jpg'); /* Thay đổi 'background.jpg' thành đường dẫn ảnh nền của bạn */
+    background-image: url('Image/background.jpg'); /* Thay đổi 'background.jpg' thành đường dẫn ảnh nền của bạn */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -170,6 +170,12 @@ body {
   }
 .content__control .listRoom{
 
+}
+.home .homename span{
+    color:aliceblue;
+    font-size: 22px;
+    padding: 6px;
+    /* margin: 4px; */
 }
 .listRoom ul{
     list-style: none;

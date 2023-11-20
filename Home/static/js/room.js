@@ -25,3 +25,55 @@ var navigation = document.querySelector("#navbar .navigation");
 navigation.addEventListener("click",(e)=>{
     e.stopPropagation();
 })
+allroom();
+function allroom(){
+    const xhttp = new XMLHttpRequest();
+        //nhận dự liệu về (http response)
+        xhttp.onload = function() 
+        {
+            //lấy dữ liệu dạng json
+            var ResponseJson=xhttp.responseText
+            //chuyển về dữ liệU javascript
+            var Response= JSON.parse(ResponseJson)
+            console.log(Response)
+            if(xhttp.status==200)
+            {
+                
+                var s = document.getElementById('home');
+                var s1 = '<ul>'
+                for(var i=0;i<Response.length;i++){
+                    s1+='<li><div class = "homename"><span>'+Response[i]['HomeName']+'</span></div><div class="listRoom"><ul>'
+                    for(var j =0;j<Response[i]['rooms'].length;j++){
+                        s1+='<li>'
+                        +'<div class="roomDetail">'
+                          +'  <div class="roomDetail__logo">'
+                                +'<div class="logo__content"></div>'
+                                +'<div class="logo__img">'
+                                    +'<img src="Image/device.jpg" alt="">'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="roomDetail__content">'
+                                +'<p>'+Response[i]['rooms'][j]['RoomName']+'</p>'
+                            +'</div>'
+                        +'</div>'
+                    +'</li>'
+                    }
+                    s1+='</ul></div></li>'
+                }
+                s1+='</ul>'
+                
+                s.innerHTML = s1;
+                
+            }
+            else
+            {
+               
+            }
+        }         
+        //khai báo phương thức và đường dẫn để request
+        xhttp.open("GET", "http://127.0.0.1:8000/ApiV1/HomeByUserID/1",false);
+        //định dạng gửi đi787
+        xhttp.setRequestHeader("Content-type","application/json")
+        //gửi
+        xhttp.send();
+}

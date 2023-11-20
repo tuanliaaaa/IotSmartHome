@@ -1,7 +1,9 @@
 from rest_framework import serializers
 
 from Entity.models.Home import Home
+from Serializer.RoomSerializer import RoomSerializer
 class HomeSerializer(serializers.ModelSerializer):
+    rooms = RoomSerializer(many=True, read_only=True)
     class Meta:
         model = Home
         fields = '__all__'
