@@ -1,3 +1,5 @@
+getTemprature();
+getHumiditi();
 function toggleNav() {
     var navigation = document.querySelector('#navbar .navigation');
     var menuIcon = document.querySelector('#navbar .menu-button');
@@ -74,6 +76,61 @@ function allroom(){
         xhttp.open("GET", "http://127.0.0.1:8000/ApiV1/HomeByUserID/1",false);
         //định dạng gửi đi787
         xhttp.setRequestHeader("Content-type","application/json")
-        //gửi
         xhttp.send();
+}
+function getTemprature(){
+    const socket = new WebSocket('ws://127.0.0.1:8000/ws/temprature/');  
+    socket.addEventListener('open', (event) => {
+        // console.log('WebSocket connection opened:', event);
+        socket.send("Connect to Server")
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+        // console.log('WebSocket message received:', event.data);
+        try{
+
+            document.getElementById('temprature').innerHTML='<p>'+event.data+'<p>';
+        }catch{
+
+        }
+    });
+
+    // Connection closed
+    socket.addEventListener('close', (event) => {
+        console.log('WebSocket connection closed:', event);
+    });
+
+    // Connection error
+    socket.addEventListener('error', (event) => {
+        console.error('WebSocket error:', event);
+    });
+}
+function getHumiditi(){
+    const socket = new WebSocket('ws://127.0.0.1:8000/ws/humiditi/');  
+    socket.addEventListener('open', (event) => {
+        // console.log('WebSocket connection opened:', event);
+        socket.send("Connect to Server")
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+        // console.log('WebSocket message received:', event.data);
+        try{
+
+            document.getElementById('humiditi').innerHTML='<p>'+event.data+'<p>';
+        }catch{
+
+        }
+    });
+
+    // Connection closed
+    socket.addEventListener('close', (event) => {
+        console.log('WebSocket connection closed:', event);
+    });
+
+    // Connection error
+    socket.addEventListener('error', (event) => {
+        console.error('WebSocket error:', event);
+    });
 }

@@ -6,7 +6,7 @@
   user-select: none;
 }
 #container{
-  background: url('bg.jpg');
+  background: url('/static/img/bg.jpg');
   height: 100vh;
   background-size: cover;
   background-position: center;
