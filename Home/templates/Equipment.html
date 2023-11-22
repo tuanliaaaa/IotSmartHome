@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="/static/css/Equipment.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body>
@@ -16,8 +16,7 @@
             </div>
             <ul>
                 <li><a href="#" class="activeNab">Equipment</a></li>
-                <li><a href="#">Room</a></li>
-                <li><a href="#">User</a></li>
+                <li><a href="/Room">Room</a></li>
             </ul>
         </div>
     </div>
@@ -37,25 +36,25 @@
                         <div class="img__dht">
                             <img src="/static/img/humiditi.png" alt="">
                         </div>
-                        <div class="dht__content">
-                            <p>9</p>
+                        <div class="dht__content" id="humiditi">
+                            <p>0</p>
                         </div>
                     </div>
                     <div class="dht__item">
                         <div class="img__dht">
                             <img src="/static/img/tempreture.png" alt="">
                         </div>
-                        <div class="dht__content">
-                            <p>9</p>
+                        <div class="dht__content" id="temprature">
+                            <p>0</p>
                         </div>
                     </div>
                 </div>
                 <div class="content__control">
-                    <div class="controlDevice">
+                    <div class="controlDevice" id="controlDevice">
                         <div class="controlDevice__header">
                             <h3>Manual Control</h3>
                         </div>
-                        <div class="controlDevice__deviceList">
+                        <!-- <div class="controlDevice__deviceList">
                             <ul>
                                 <li>
                                     <div class="deviceDetail">
@@ -123,13 +122,13 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
             </div>
         </div>
     </div>
-    <script src="/static/js/home.js"></script>
+    <script src="/static/js/Equipment.js"></script>
 </body>
 </html>

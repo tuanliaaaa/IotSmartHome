@@ -171,7 +171,9 @@ body {
 .content__control .listRoom{
 
 }
-.home .homename span{
+#home .homename span{
+    margin-top: 10px;
+    margin-left: 10px;
     color:aliceblue;
     font-size: 22px;
     padding: 6px;

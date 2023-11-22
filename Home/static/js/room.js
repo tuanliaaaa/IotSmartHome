@@ -46,12 +46,12 @@ function allroom(){
                 for(var i=0;i<Response.length;i++){
                     s1+='<li><div class = "homename"><span>'+Response[i]['HomeName']+'</span></div><div class="listRoom"><ul>'
                     for(var j =0;j<Response[i]['rooms'].length;j++){
-                        s1+='<li>'
+                        s1+='<li onclick="roomDetail('+j+')">'
                         +'<div class="roomDetail">'
                           +'  <div class="roomDetail__logo">'
                                 +'<div class="logo__content"></div>'
                                 +'<div class="logo__img">'
-                                    +'<img src="Image/device.jpg" alt="">'
+                                    +'<img src="/static/img/device.jpg" alt="">'
                                 +'</div>'
                             +'</div>'
                             +'<div class="roomDetail__content">'
@@ -133,4 +133,8 @@ function getHumiditi(){
     socket.addEventListener('error', (event) => {
         console.error('WebSocket error:', event);
     });
+}
+function roomDetail(id){
+   
+    window.location="/EquipmentByRoom/"+id;
 }
