@@ -33,17 +33,15 @@ class EquipmentById(APIView):
             return Response({"massage":"Thiết bị  không tồn tại"},status=204)
         equiupmentUpdateSerializer = EquipmentSerializer(equipment, data=request.data, partial=True)
         if equiupmentUpdateSerializer.is_valid():
-            equiupmentUpdateSerializer.save()
-            a = request.data['StatusActive']
-            b = equipment['EquipmentName']
-            url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/update/?value="+a
-
+            a = str(request.data['StatusActive'])
+            print(a)
+            equipment.StatusActive=a
+            equipment.save()
+            url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/update/"+equipment.EquipmentKey+"?value="+a+"&fbclid=IwAR1swiQo5wywsl5hFCw1eIZRc9MkCtlVY0BZ7RgiozCZtp9Pe5Rn_BPtIlk"
             response = requests.get(url)
 
             if response.status_code == 200:
-                # Xử lý dữ liệu nhận được từ API
-                data = response.json()
-                print(data)
+                
                 return Response(equiupmentUpdateSerializer.data)
             else:
                 print(f"Request failed with status code {response.status_code}")
