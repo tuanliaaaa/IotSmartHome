@@ -31,7 +31,7 @@ class Signup(APIView):
             return Response(jwtUser,status=201)
         return Response(userSerializer.errors, status=400)
 class AllUser(APIView):
-    @method_decorator(RoleRequest(allowedRoles=['Admin']))
+    # @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def get(self,request):
         page = request.GET.get('page')
         per_page = request.GET.get('per_page', 2) 
@@ -41,7 +41,7 @@ class AllUser(APIView):
         userListSerializer = UserByAdminSerializer(userList,many=True)
         return Response(userListSerializer.data,status=200)
 class UserById(APIView):
-    @method_decorator(RoleRequest(allowedRoles=['Admin']))
+    # @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def get(self,request,UserID):
         try:
             user= User.objects.get(pk=UserID)

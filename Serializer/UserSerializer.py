@@ -11,3 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
             'Password': {'write_only': True},
             
         }
+class UserByAdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
