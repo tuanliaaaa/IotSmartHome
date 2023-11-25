@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'Api',
     'Home',
     'Entity',
-    'Serializer'
+    'Serializer',
+    'Admin'
 ]
 
 MIDDLEWARE = [
@@ -91,9 +92,9 @@ ASGI_APPLICATION = 'core.asgi.application'
 DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'iot2',  
+        'NAME': 'iot6',  
         'USER': 'root',  
-        'PASSWORD': '22122002',  
+        'PASSWORD': '18012002',  
         'HOST': '127.0.0.1',  
         'PORT': '3306',  
         'OPTIONS': {  

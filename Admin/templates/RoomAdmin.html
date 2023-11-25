@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/User.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  
+</head>
+<body>
+    <div id="header">
+        <div class="header__nav">
+            <div class="header__nav__logo">
+                <!-- <img src="/static/image/netflix.png" alt=""> -->
+            </div>
+            <div class="header__nav__mavbar">
+                <ul>
+                    
+                    <li>
+                        <a href="/Admin/User">User</a>
+                    </li>
+                    <li>
+                       <a href="/Admin/HomeAdmin">Home</a>                   
+                    </li>
+                    <li>
+                        <a href="/Admin/RoomAdmin">Room</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/EquimentAdmin">Equiments</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/SensorAdmin">Sensor</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="header__userInfor">
+
+            <div class="header__userInfor__search">
+                <div id="userInfor__search">
+                    <i class="fa-solid fa-magnifying-glass" onclick="searchApear()"></i><input type="text" placeholder="Tiltles, Characters, Genres" ><i class="fa-solid fa-xmark SEARCH"></i>
+                </div>
+            </div>
+            <div class="header__userInfor__account">
+                <div class="userInfor__account__img">
+                    <img src="http://occ-0-325-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABQ4A0D_KyHSDA95zx1UA0MK2HgY3_JC2ImiXV48pqZlpA1yUq8ePZdjlQF0_RdJEgT_B-z6bjjsR9jW82wgeXtIW8vM1pb8.png?r=b36" alt="">
+                </div>
+                <div class="userInfor__account__LogOut">
+                    <button onclick="LogOut()">Exit Kids</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="container">
+        <div class="container__body">
+            <div class="container__body__content">
+                <div class="body__content__header">
+                    <div class="content__header__title">
+                        <h1>Room</h1>
+                    </div>
+                    <div class="content__header__AddUser">
+                       
+                    </div>
+                </div>
+                <div class="body__content__listUser">
+                    <div class="listUser__header">
+                        <div class="listUser__header__nav">
+                            <div class="listUser__header__nav__Show">
+                                <p>RoomList</p>
+                            </div>
+                            <div class="listUser__header__nav__Search">
+                                <div class="nav__search__User">
+                                    
+                                        <label for="search__User" >Search</label>
+                                        <input type="text" placeholder="Room" id="search__User" onchange="searchUser()">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listUser__body">
+                        <table id="table__Users">
+                            <thead>
+                                <tr>
+                                    <th>Room Name</th>
+                                    <th>HomeID</th>
+                                    <th>Username</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Room 1</td>
+                                    <td>1</td>
+                                    <td>Tuấn</td>
+                                    <td>
+                                        <div class="action__User">
+                                            <div class="action__User__Edit">
+                                                <i class="fa-solid fa-pen-to-square" onclick="editUser('+Response[i].id+')"></i></div>
+                                            <div class="action__User__Delete">
+                                                <i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Room 2</td>
+                                    <td>1</td>
+                                    <td>Tuấn</td>
+                                    <td>
+                                        <div class="action__User">
+                                            <div class="action__User__Edit">
+                                                <i class="fa-solid fa-pen-to-square" onclick="editUser('+Response[i].id+')"></i></div>
+                                            <div class="action__User__Delete">
+                                                <i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="listUser__footer">
+                        <div class="listUser__footer__CountShow">
+                            <p>Showing entries</p>
+                        </div>
+                        <div class="listUser__footer__indexPage" id="indexPage">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        
+    </div>
+
+</body>
+<script src="/static/js/RoomAdmin.js"></script>
+</html>
