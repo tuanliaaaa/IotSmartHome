@@ -89,19 +89,18 @@ ASGI_APPLICATION = 'core.asgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {  
-    'default': {  
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'iot6',  
-        'USER': 'root',  
-        'PASSWORD': '18012002',  
-        'HOST': '127.0.0.1',  
-        'PORT': '3306',  
-        'OPTIONS': {  
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-        }  
-    }  
+# 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'iotsmarthome',
+        'USER': 'nhi',
+        'PASSWORD': '18012002',
+        'HOST': 'mysql-155625-0.cloudclusters.net',
+        'PORT': '19984',
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

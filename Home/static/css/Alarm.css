@@ -1,0 +1,294 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    max-height: 100%;
+}
+#navbar{
+    position: relative;
+    left: 0;
+    top:0;
+    height: 0vh;
+    z-index: 100;
+   right: 0;
+}
+#navbar.unshow{
+    height: 100vh;
+}
+.menu-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 100;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+.menu-button.hidden{
+    display: none;
+}
+.navigation {
+    position: absolute;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+.navigation .nav__header{
+    border-bottom: 1px solid white;
+
+}
+.nav__header h3{
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+    text-transform: uppercase;
+}
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navigation ul li {
+    padding: 10px;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+.navigation ul li a.activeNab{
+    color: black;
+}
+.navigation ul li a:hover{
+    color: black;
+}
+#main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/static/img/background.jpg'); /* Thay đổi 'background.jpg' thành đường dẫn ảnh nền của bạn */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+#main-content .header{
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.header .header__title{
+    margin-right: 50%;
+    transform:  translateX(140%);
+}
+.header__title h2{
+    color: white;
+   
+}
+.header .header__nav{
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.header__nav p{
+    text-align: center;
+    color: white;
+    margin-right: 40px;
+    cursor: pointer;
+    font-size: 18px;
+}
+.header__nav p:hover{
+    text-decoration: underline;
+    
+}
+#container{
+
+}
+#container .container__content{
+    width: 90%;
+    margin: auto;
+
+}
+
+.container__content .dht{
+    margin-top: 10px;
+    display: flex;
+    padding-right: 20px;
+    justify-content: end;
+    color: white;
+}
+.dht .dht__item{
+    display: flex;
+    align-items: center;
+    
+}
+.dht__item .img__dht{
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+.img__dht img{
+    width: 100%;
+    height: 100%;
+}
+.dht__item .dht__content{
+
+}
+.dht__content p{
+
+}
+.container__content .content__control{
+    border: 1px solid  rgba(255, 255, 255, 0.4);
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5);
+    flex-grow: 1;
+    
+    border-radius: 5px;
+    min-height: 80vh;
+    margin-top: 5px;
+}
+::-webkit-scrollbar {
+    width: 0;
+  }
+.content__control .controlDevice{
+
+}
+.controlDevice .controlDevice__header{
+    margin: 50px 0;
+}
+.controlDevice__header h3{
+    text-align: center;
+    font-size: 24px;
+    color: white;
+}
+.controlDevice .controlDevice__deviceList{
+
+}
+.controlDevice__deviceList ul{
+    list-style: none;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.controlDevice__deviceList ul li{
+    width: 33.33%;
+}
+ul li .deviceDetail{
+    display: flex;
+    
+    align-items: center;
+    padding: 5px;
+}
+.deviceDetail .deviceLabel{
+    background-color: black;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 20px;
+}
+.deviceLabel p{
+    padding: 5px;
+    color: white;
+    font-size: 20px;
+}
+.deviceLabel p i{
+
+}
+.deviceDetail .deviceContent{
+
+}
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px; /* Chiều rộng của toggle switch */
+    height: 20px; /* Chiều cao của toggle switch */
+}
+
+/* Thanh nền */
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Đèn bật/tắt */
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px; /* Điều này sẽ tạo thành hình tròn */
+}
+
+/* Hiệu ứng khi bật */
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px; /* Chiều cao của đèn LED */
+    width: 16px; /* Chiều rộng của đèn LED */
+    left: 2px; /* Khoảng cách từ bên trái */
+    bottom: 2px; /* Khoảng cách từ bên dưới */
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%; /* Tạo thành hình tròn */
+}
+
+/* Khi checkbox được kiểm tra */
+input:checked + .toggle-slider {
+    background-color: #2196F3;
+}
+
+/* Hiệu ứng khi bật */
+input:checked + .toggle-slider:before {
+    transform: translateX(20px); /* Di chuyển sang phải để bật */
+}
+#alarm{
+    padding : 20px;
+}
+#alarm .clock {
+    display :flex;
+    margin : 20px;
+    width: 30%;
+    /* text-align: center; */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    align-items: center;
+}
+
+.clock input[type="datetime-local"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 10px 20px;
+} 
+.addAlarm{
+    float: right;
+}
+.addAlarm i{
+    color:#fff;
+    font-size: 24px;
+    margin: 20px;
+}
