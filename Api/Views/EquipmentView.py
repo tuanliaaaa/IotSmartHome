@@ -4,13 +4,23 @@ from rest_framework.response import Response
 from Serializer.EquipmentSerializer import EquipmentSerializer
 from django.db.models import Q
 import requests
-
+import httpx
 from django.utils.decorators import method_decorator
+def getvalueByEquipmentName(equipmentName):
+    url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/get/" + equipmentName
 
+    with httpx.AsyncClient() as client:
+        response =  client.get(url)
+        if response.status_code == 200:
+            json_data = response.json()
+            return json_data[0]
+        else:
+            return None
 class EquipmentByRoomId(APIView):
     def get(self,request,roomID):
         try:
             equipmentList = Equipment.objects.filter(Room_pk=roomID)
+
         except:
             return Response({"massage":"Thiết bị  không tồn tại"},status=204)
         equipmentListSerializer = EquipmentSerializer(equipmentList,many = True)
@@ -21,6 +31,9 @@ class EquipmentById(APIView):
     def get(self,request,equipmentID):
         try:
             equipment = Equipment.objects.get(pk=equipmentID)
+            value= getvalueByEquipmentName(equipment.EquipmentKey)
+            equipment.StatusActive=value
+            equipment.save()
         except:
             return Response({"massage":"Thiết bị  không tồn tại"},status=204)
         equipmentSerializer = EquipmentSerializer(equipment)
