@@ -9,6 +9,69 @@ body {
     overflow: hidden;
     max-height: 100%;
 }
+#logger{
+    display: none;
+    position: fixed;
+    z-index: 101;
+    top:0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+
+}
+#logger .logger__content{
+    background-color: white;
+    height:160px;
+    width: 400px;
+    border-radius: 10px;
+}
+.logger__content .loggercontent__body{
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+    padding: 0 20px;
+}
+.loggercontent__body .loggerbody__ListImg{
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.loggerbody__ListImg .loggerImg__micro{
+    width: 50px;
+    height: 50px;
+}
+.loggerImg__micro img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.loggerbody__ListImg .loggerImg__sound{
+    width: 300px;
+}
+.loggerImg__sound img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.loggercontent__body .loggerbody__Text{
+
+}
+.loggerbody__Text h4{
+    font-size: 20px;
+}
+
+
+
+
+
+
 #navbar{
     position: relative;
     left: 0;
@@ -126,9 +189,34 @@ body {
     margin: auto;
     
 }
-
-.container__content .dht{
+.container__content .content__title{
     margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.container__content .title__mode{
+    display: flex;
+    align-items: center;
+}
+.title__mode .mode__controll{
+}
+.mode__controll input{
+    cursor: pointer;
+
+}
+.title__mode .mode_voice{
+
+}
+.mode_voice .voice__img{
+    cursor: pointer;
+}
+.voice__img img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+ 
+}
+.content__title .dht{
     display: flex;
     padding-right: 20px;
     justify-content: end;

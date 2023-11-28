@@ -8,6 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body>
+    <div id="logger" onclick="unshow()">
+        <div class="logger__content">
+            <div class="loggercontent__body">
+                <div class="loggerbody__ListImg">
+                    <div class="loggerImg__micro">
+                        <img src="/static/img/mic.png" alt="">
+                    </div>
+                    <div class="loggerImg__sound" >
+                        <img src="/static/img/supersonic.png" alt="">
+                    </div>
+                </div>
+                <div class="loggerbody__Text">
+                    <h4> bạn đang nói gì v</h4>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="navbar">
         <div class="menu-button" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></div>
         <div class="navigation">
@@ -32,21 +49,33 @@
         </div>
         <div id="container">
             <div class="container__content">
-                <div class="dht">
-                    <div class="dht__item">
-                        <div class="img__dht">
-                            <img src="/static/img/humiditi.png" alt="">
+                <div class="content__title">
+                    <div class="title__mode">
+                        <div class="mode__controll">
+                            <input type="range" id="speedSlider" name="speedSlider" min="0" max="3" step="1" value="${listEquipment[i]['StatusActive']}" >                              
                         </div>
-                        <div class="dht__content" id="humiditi">
-                            <p>0</p>
+                        <div class="mode_voice" onclick="showvoice()">
+                            <div class="voice__img">
+                                <img src="/static/img/mic.png" alt="">
+                            </div>
                         </div>
                     </div>
-                    <div class="dht__item">
-                        <div class="img__dht">
-                            <img src="/static/img/tempreture.png" alt="">
+                    <div class="dht">
+                        <div class="dht__item">
+                            <div class="img__dht">
+                                <img src="/static/img/humiditi.png" alt="">
+                            </div>
+                            <div class="dht__content" id="humiditi">
+                                <p>0</p>
+                            </div>
                         </div>
-                        <div class="dht__content" id="temprature">
-                            <p>0</p>
+                        <div class="dht__item">
+                            <div class="img__dht">
+                                <img src="/static/img/tempreture.png" alt="">
+                            </div>
+                            <div class="dht__content" id="temprature">
+                                <p>0</p>
+                            </div>
                         </div>
                     </div>
                 </div>

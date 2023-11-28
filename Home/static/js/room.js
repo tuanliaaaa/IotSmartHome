@@ -138,3 +138,15 @@ function roomDetail(id){
    
     window.location="/EquipmentByRoom/"+id;
 }
+
+function showvoice(){  
+    var logger = document.getElementById('logger');
+    logger.style.display="flex";
+}
+function unshow(){
+    var logger = document.getElementById('logger');
+    logger.style.display="none";
+}
+document.querySelector("#logger .logger__content").addEventListener('click', function(event) {
+    event.stopPropagation(); 
+});
