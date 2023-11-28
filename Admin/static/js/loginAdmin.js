@@ -1,6 +1,6 @@
 
 if(localStorage.getItem("Token")){
-    window.location="/Admin/HomeAdmin";
+    window.location="/Admin/User";
 
 }
 else{
@@ -90,7 +90,7 @@ else{
                 var tokenResponseJson=xhttp.responseText
                 var tokenResponse= JSON.parse(tokenResponseJson)
                 localStorage.setItem("Token", tokenResponse['access']);
-                window.location='/Admin/HomeAdmin';
+                window.location='/Admin/User';
                 
             }
             else
@@ -106,7 +106,7 @@ else{
             Password:passwordInput.value
         }
         postData=JSON.stringify(userInfo)
-        xhttp.open("POST", "/ApiV1/Token",false);
+        xhttp.open("POST", "/ApiV1/User/Token",false);
         xhttp.setRequestHeader("Content-type","application/json")
         xhttp.send(postData)
     }

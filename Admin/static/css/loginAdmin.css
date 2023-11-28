@@ -46,8 +46,8 @@ img {
 }
 #header .header__img{
 	position: absolute;
-	height: 150vh;
-
+	height: 110vh;
+	
 }
 .header__img img{
 	width: 100%;
@@ -90,7 +90,7 @@ img {
 	position: relative;
 	z-index: 2;
 	width: 450px;
-	height: 650px;
+	height: 500px;
 	background: rgb(0, 0, 0, 0.65);
 	margin: 0 auto;
 	display: flex;
@@ -218,42 +218,3 @@ input[type=password] {
 	background: #343434;
 }
 
-/* ------ input end ------- */
-
-.fcbk {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	font-size: 0.8em;
-}
-
-.fcbk img {
-	width: 20px;
-	margin-right: 10px;
-}
-
-.signup {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-}
-
-.signup p {
-	margin-right: 5px;
-}
-
-.more {
-	font-size: 0.8em;
-	line-height: 1.1em;
-}
-
-.more a {
-	color: rgb(17, 108, 228);
-}
-
-.more a:hover,
-.signup a:hover {
-	text-decoration: underline;
-}

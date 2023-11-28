@@ -93,11 +93,11 @@ ASGI_APPLICATION = 'core.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'iotsmarthome',
-        'USER': 'nhi',
-        'PASSWORD': '18012002',
-        'HOST': 'mysql-155625-0.cloudclusters.net',
-        'PORT': '19984',
+        'NAME': 'smarthome',
+        'USER': 'root',
+        'PASSWORD': '22122002',
+        'HOST': 'localhost',
+        
     }
 }
 

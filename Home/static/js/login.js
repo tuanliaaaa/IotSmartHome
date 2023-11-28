@@ -20,7 +20,7 @@ function login()
        if(xhttp.status==201)
        {
            localStorage.setItem("Token", tokenResponse['access']);
-           window.location='/Admin/AllUser';
+           window.location='/Room';
 
            
        }

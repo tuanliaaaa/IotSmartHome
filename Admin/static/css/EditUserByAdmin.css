@@ -42,9 +42,8 @@ body{
     
 }
 .header__nav__logo img{
-    height: 110px;
-    margin: -24px -20px 0px -6px;
-
+    height: 58px;
+    margin: 0px 0px 0px 10px;
 }
 .header__nav .header__nav__mavbar{
     display: flex;

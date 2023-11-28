@@ -30,48 +30,31 @@ class Signup(APIView):
             jwtUser={"access":jwtData}
             return Response(jwtUser,status=201)
         return Response(userSerializer.errors, status=400)
-class AllUser(APIView):
+class AllUserByAdmin(APIView):
     # @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def get(self,request):
-        page = request.GET.get('page')
-        per_page = request.GET.get('per_page', 2) 
-        offSet = (int(page) - 1) * int(per_page)
-        limit = offSet + int(per_page)
-        userList = User.objects.all()[offSet:limit]
+        userList = User.objects.filter(userrole__Role__RoleName="User")
         userListSerializer = UserByAdminSerializer(userList,many=True)
         return Response(userListSerializer.data,status=200)
-class UserById(APIView):
+class SearchUserByAdmin(APIView):
     # @method_decorator(RoleRequest(allowedRoles=['Admin']))
-    def get(self,request,UserID):
-        try:
-            user= User.objects.get(pk=UserID)
-            userSerializer = UserByAdminSerializer(user)
-            return Response(userSerializer.data,status=200)
-        except:
-            return Response({"massage":"User không tồn tại"},status=204)   
-class SearchUser(APIView):
-    @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def get(self,request,Username):
-        page = request.GET.get('page',1)
-        per_page = request.GET.get('per_page', 2) 
-        offSet = (int(page) - 1) * int(per_page)
-        limit = offSet + int(per_page)
-        user= User.objects.filter(Q(UserName__icontains=Username)|Q(FullName__icontains=Username)).distinct()[offSet:limit]
-        userSerializer = UserByAdminSerializer(user,many=True)
-        return Response(userSerializer.data,status=200)
-class UserByIdForAdmin(APIView):
+        userList = User.objects.filter(userrole__Role__RoleName="User",UserName__icontains=Username)
+        userListSerializer = UserByAdminSerializer(userList,many=True)
+        return Response(userListSerializer.data,status=200)  
+class UserDetailByAdmin(APIView):
     @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def get(self,request,UserID):
         try:
-            user= User.objects.get(pk=UserID)
+            user= User.objects.get(userrole__Role__RoleName="User",pk=UserID)
             userSerializer = UserByAdminSerializer(user)
             return Response(userSerializer.data,status=200)
         except:
-            return Response({"massage":"User không tồn tại"},status=204)
+            return Response({"massage":"User không tồn tại"},status=404)
     @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def patch(self,request,UserID):
         try:
-            user= User.objects.get(pk=UserID)
+            user= User.objects.get(userrole__Role__RoleName="User",pk=UserID)
             userUpdateSerializer = UserByAdminSerializer(user, data=request.data,partial=True)
             if userUpdateSerializer.is_valid():
                 userUpdateSerializer.save()
@@ -82,25 +65,26 @@ class UserByIdForAdmin(APIView):
     @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def delete(self,request,UserID):
         try:
-            user= User.objects.get(pk=UserID)
+            user= User.objects.get(userrole__Role__RoleName="User",pk=UserID)
             user.delete()
-            return Response({'massage':'User đã xóa thành công'},status=204)
+            return Response({'message':'User đã xóa thành công'},status=204)
         except:
-            return Response({"massage":"User không tồn tại"},status=200)
-class UserByLogin(APIView):
-    @method_decorator(RoleRequest(allowedRoles=['Admin','NormalUser']))
-    def get(self,request):
-        user= User.objects.get(pk=request.userID)
-        userSerializer = UserSerializer(user)
-        return Response(userSerializer.data,status=200)
-    @method_decorator(RoleRequest(allowedRoles=['Admin','NormalUser']))
-    def patch(self,request):
-        user= User.objects.get(pk=request.userID)
-        if request.data['FullName']:
-            user.FullName=request.data['FullName']
-            user.save()
-        userSerializer = UserSerializer(user)
-        return Response(userSerializer.data,status=200)
+            return Response({"message":"User Not Found"},status=404)
+
+
+
+
+class UserById(APIView):
+    # @method_decorator(RoleRequest(allowedRoles=['Admin']))
+    def get(self,request,UserID):
+        try:
+            user= User.objects.get(pk=UserID)
+            userSerializer = UserByAdminSerializer(user)
+            return Response(userSerializer.data,status=200)
+        except:
+            return Response({"massage":"User không tồn tại"},status=204)   
+
+
 class ChangePassword(APIView):
     @method_decorator(RoleRequest(allowedRoles=['Admin','NormalUser']))
     def patch(self,request):
