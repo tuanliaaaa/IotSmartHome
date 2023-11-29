@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/static/css/ManagerSensorByAdmin.css">
+    <link rel="stylesheet" href="/static/css/EditSensorByAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  
 </head>
 <body>
     <div id="header">
@@ -17,7 +16,7 @@
                 <img src="/static/img/iconlogo.png" alt="">
             </div>
             <div class="header__nav__mavbar">
-                <ul>  
+                <ul>
                     <li>
                         <a href="/Admin/User">User</a>
                     </li>
@@ -32,22 +31,23 @@
                     </li>
                     <li>
                         <a href="/Admin/SensorAdmin">Sensor</a>
-                    </li>             
+                    </li>
+            
                 </ul>
             </div>
         </div>
-        <div class="header__userInfor">
+        <div class="header__categoryInfor">
 
-            <div class="header__userInfor__search">
-                <div id="userInfor__search">
+            <div class="header__categoryInfor__search">
+                <div id="categoryInfor__search">
                     <i class="fa-solid fa-magnifying-glass" onclick="searchApear()"></i><input type="text" placeholder="Tiltles, Characters, Genres" ><i class="fa-solid fa-xmark SEARCH"></i>
                 </div>
             </div>
-            <div class="header__userInfor__account">
-                <div class="userInfor__account__img">
+            <div class="header__categoryInfor__account">
+                <div class="categoryInfor__account__img">
                     <img src="http://occ-0-325-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABQ4A0D_KyHSDA95zx1UA0MK2HgY3_JC2ImiXV48pqZlpA1yUq8ePZdjlQF0_RdJEgT_B-z6bjjsR9jW82wgeXtIW8vM1pb8.png?r=b36" alt="">
                 </div>
-                <div class="userInfor__account__LogOut">
+                <div class="categoryInfor__account__LogOut">
                     <button onclick="LogOut()">Exit Kids</button>
                 </div>
             </div>
@@ -59,53 +59,28 @@
             <div class="container__body__content">
                 <div class="body__content__header">
                     <div class="content__header__title">
-                        <h1>Sensor</h1>
+                        <h1>EditSensor</h1>
                     </div>
-                    <div class="content__header__AddSensor">
-                        <div class="AddSensor">
-                           <a href="/Admin/AddSensor"> <p>Add Sensor</p> </a>
+                </div>
+                <div class="body__content__Sensor">
+                    <div class="Sensor__infor" id="SensorEdit__inFor">
+                        
+                    </div>
+                    <div class="Save__Change">
+                        <div id="save__button" onclick="Save()">
+                            Save
                         </div>
                     </div>
                 </div>
-                <div class="body__content__listSensor">
-                    <div class="listSensor__header">
-                        <div class="listSensor__header__nav">
-                            <div class="listSensor__header__nav__Show">
-                                <p>SensorList</p>
-                            </div>
-                            <div class="listSensor__header__nav__Search">
-                                <div class="nav__search__Sensor">
-                                    
-                                        <label for="search__Sensor" >Search</label>
-                                        <input type="text" placeholder="Sensor" id="search__Sensor" onchange="searchSensor()">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="listSensor__body">
-                        <table id="table__Sensors">
-                           
-                            
-                        </table>
-                    </div>
-                    <div class="listSensor__footer">
-                        <div class="listSensor__footer__CountShow">
-                            <p>Showing entries</p>
-                        </div>
-                        <div class="listSensor__footer__indexPage" id="indexPage">
-                            
-                        </div>
-                    </div>
-                </div>
+
             </div>
+            
         </div>
     </div>
     <div id="footer">
         
     </div>
-   
 </body>
-<script src="/static/js/ManagerSensorByAdmin.js"></script>
+<script src="/static/js/EditSensorByAdmin.js"></script>
 
 </html>

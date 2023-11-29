@@ -2,7 +2,7 @@ from django.urls import path
 from django.shortcuts import redirect
 from .views import (Admin,loginAdmin,EditUser,RoomAdmin,SensorAdmin,HomeAdmin,EquimentAdmin,EditHome,AddHome,EditRoom
 ,EquipmentAdmin)
-from .views import AddRoom,AddEquipment,EditEquipment
+from .views import AddRoom,AddEquipment,EditEquipment,EditSensor,AddSensor
 urlpatterns = [
     path('Login',loginAdmin.as_view()),
     path('User',Admin.as_view()),
@@ -18,5 +18,9 @@ urlpatterns = [
     path('EquipmentAdmin',EquipmentAdmin.as_view()),
     path('EditEquipment/<int:EquipmentID>',EditEquipment.as_view()),
     path('AddEquipment',AddEquipment.as_view()),
+
+    path('SensorAdmin',SensorAdmin.as_view()),
+    path('EditSensor/<int:SensorID>',EditSensor.as_view()),
+    path('AddSensor',AddSensor.as_view()),
 
 ]

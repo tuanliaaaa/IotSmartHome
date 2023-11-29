@@ -10,6 +10,7 @@ from .Views.ModeView import ModeByUser
 from .Views.RoomAdminView import AllRoomAdmin
 from .Views.EquipmentAdmView import AllEquipment,SearchEquipmentByAdmin,EquipmentDetailByAdmin
 from .Views.EquipmentAdminView import AllEquipmentAdmin
+from .Views.SensorView import AllSensor,SearchSensorByAdmin,SensorDetailByAdmin
 urlpatterns = [
     path('HomeByUserLogin',HomeByUserLogin.as_view()),
     path('RoomByHomeID/<int:homeID>',RoomByHomeId.as_view()),
@@ -43,6 +44,10 @@ urlpatterns = [
     path('AllEquipment',AllEquipment.as_view()),
     path('SearchEquipmentByAdmin/<str:EquipmentName>',SearchEquipmentByAdmin.as_view()),
     path('EquipmentDetailByAdmin/<str:EquipmentID>',EquipmentDetailByAdmin.as_view()),
+
+    path('AllSensor',AllSensor.as_view()),
+    path('SearchSensorByAdmin/<str:SensorName>',SearchSensorByAdmin.as_view()),
+    path('SensorDetailByAdmin/<str:SensorID>',SensorDetailByAdmin.as_view()),
 
 
 ]

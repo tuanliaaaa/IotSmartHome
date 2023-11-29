@@ -32,7 +32,10 @@ class AddEquipment(View):
         return render(request,'AddEquipmentByAdmin.html') 
 class SensorAdmin(View):
     def get(self,request):
-        return render(request,"SensorAdmin.html")
+        return render(request,"ManagerSensorByAdmin.html")
+class EditSensor(View):
+    def get(self,request,SensorID):
+        return render(request,'EditSensorByAdmin.html') 
 class EquimentAdmin(View):
     def get(self,request):
         return render(request,"EquimentAdmin.html")
@@ -45,4 +48,7 @@ class AddHome(View):
 class AddRoom(View):
     def get(self,request):
         return render(request,'AddRoomByAdmin.html') 
+class AddSensor(View):
+    def get(self,request):
+        return render(request,'AddSensorByAdmin.html') 
     

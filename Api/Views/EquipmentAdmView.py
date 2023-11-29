@@ -7,14 +7,6 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 from core.roleLoginDecorater import RoleRequest
 
-class EquipmentByHomeId(APIView):
-    def get(self,request,homeID):
-        try:
-            EquipmentList = Equipment.objects.filter(Home_pk=homeID)
-        except:
-            return Response({"massage":"Equipment Not Found"},status=204)
-        EquipmentListSerializer = EquipmentEquipmentAdminSerializer(EquipmentList,many = True)
-        return Response(EquipmentListSerializer.data,status=200)
 class AllEquipment(APIView):
     @method_decorator(RoleRequest(allowedRoles=['Admin']))
     def get(self,request):
