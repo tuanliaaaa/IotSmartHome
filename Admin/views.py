@@ -15,9 +15,21 @@ class EditUser(View):
 class RoomAdmin(View):
     def get(self,request):
         return render(request,"ManagerRoomByAdmin.html")
+class EditRoom(View):
+    def get(self,request,RoomID):
+        return render(request,'EditRoomByAdmin.html') 
 class HomeAdmin(View):
     def get(self,request):
         return render(request,"ManagerHomeByAdmin.html")
+class EquipmentAdmin(View):
+    def get(self,request):
+        return render(request,"ManagerEquipmentByAdmin.html")
+class EditEquipment(View):
+    def get(self,request,EquipmentID):
+        return render(request,'EditEquipmentByAdmin.html') 
+class AddEquipment(View):
+    def get(self,request):
+        return render(request,'AddEquipmentByAdmin.html') 
 class SensorAdmin(View):
     def get(self,request):
         return render(request,"SensorAdmin.html")
@@ -30,4 +42,7 @@ class EditHome(View):
 class AddHome(View):
     def get(self,request):
         return render(request,'AddHomeByAdmin.html') 
+class AddRoom(View):
+    def get(self,request):
+        return render(request,'AddRoomByAdmin.html') 
     

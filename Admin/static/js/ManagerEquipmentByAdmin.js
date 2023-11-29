@@ -7,7 +7,7 @@ if(localStorage.getItem("Token")){
         RoleList=result;
         const roleNameToCheck = "Admin";
         if (isRoleNameExist(RoleList, roleNameToCheck)) {
-            GetAllRoom();
+            GetAllEquipment();
         } else {
             localStorage.removeItem("Token");
             window.location="/Admin/Login";
@@ -55,12 +55,12 @@ function LogOut(){
     window.location="/Admin/Login";
     localStorage.removeItem("Token");
 }
-function searchRoom()
+function searchEquipment()
 {
-    var Roomname =document.getElementById('search__Room').value;
-    if(Roomname=='')
+    var Equipmentname =document.getElementById('search__Equipment').value;
+    if(Equipmentname=='')
     {
-        GetAllRoom();
+        GetAllEquipment();
     }else{
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() 
@@ -69,14 +69,14 @@ function searchRoom()
             {
                 var ResponseJson=xhttp.responseText
                 var Response= JSON.parse(ResponseJson)
-                var tableRoomElement = document.getElementById('table__Rooms');
+                var tableEquipmentElement = document.getElementById('table__Equipments');
                 
-                var tableRoomHtml ='<thead><tr><th>Room Name</th><th>Home Name</th><th>Action</th></tr></thead><tbody>';
+                var tableEquipmentHtml ='<thead><tr><th>Equipment Name</th><th>Home Name</th><th>Action</th></tr></thead><tbody>';
                 for (var i =0;i<Response.length;i++){
-                    tableRoomHtml+='<tr><td>'+Response[i].RoomName+'</td><td>'+Response[i].Home.HomeName+'</td><td><div class="action__Room"><div class="action__Room__Edit"><i class="fa-solid fa-pen-to-square" onclick="editRoom('+Response[i].id+')"></i></div><div class="action__Room__Delete"><i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div></div></td></tr>'
+                    tableEquipmentHtml+='<tr><td>'+Response[i].EquipmentName+'</td><td>'+Response[i].Home.HomeName+'</td><td><div class="action__Equipment"><div class="action__Equipment__Edit"><i class="fa-solid fa-pen-to-square" onclick="editEquipment('+Response[i].id+')"></i></div><div class="action__Equipment__Delete"><i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div></div></td></tr>'
                 }
-                tableRoomHtml+='</body>';
-                tableRoomElement.innerHTML=tableRoomHtml;
+                tableEquipmentHtml+='</body>';
+                tableEquipmentElement.innerHTML=tableEquipmentHtml;
             }else if(xhttp.status==204){
                
             }
@@ -92,7 +92,7 @@ function searchRoom()
             }
         }         
         //khai báo phương thức và đường dẫn để request
-        xhttp.open("GET", "/ApiV1/SearchRoomByAdmin/"+Roomname,false);
+        xhttp.open("GET", "/ApiV1/SearchEquipmentByAdmin/"+Equipmentname,false);
         //định dạng gửi đi787
         xhttp.setRequestHeader("Content-type","application/json")
         token = localStorage.getItem("Token");
@@ -101,7 +101,7 @@ function searchRoom()
         xhttp.send();
     }
 }
-function GetAllRoom(){
+function GetAllEquipment(){
     
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() 
@@ -110,15 +110,15 @@ function GetAllRoom(){
         {
             var ResponseJson=xhttp.responseText
             var Response= JSON.parse(ResponseJson)
-            var tableRoomElement = document.getElementById('table__Rooms');
+            var tableEquipmentElement = document.getElementById('table__Equipments');
            
             
-            var tableRoomHtml ='<thead><tr><th>Room Name</th><th>Home Name</th><th>Action</th></tr></thead><tbody>';
+            var tableEquipmentHtml ='<thead><tr><th>Equipment Name</th><th>Room Name</th><th>Action</th></tr></thead><tbody>';
             for (var i =0;i<Response.length;i++){
-                tableRoomHtml+='<tr><td>'+Response[i].RoomName+'</td><td>'+Response[i].Home['HomeName']+'</td><td><div class="action__Room"><div class="action__Room__Edit" ><i class="fa-solid fa-pen-to-square" onclick="editRoom('+Response[i].id+')"></i> </div><div class="action__Room__Delete"><i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div></div></td></tr>'
+                tableEquipmentHtml+='<tr><td>'+Response[i].EquipmentName+'</td><td>'+Response[i].Room['RoomName']+'</td><td><div class="action__Equipment"><div class="action__Equipment__Edit" ><i class="fa-solid fa-pen-to-square" onclick="editEquipment('+Response[i].id+')"></i> </div><div class="action__Equipment__Delete"><i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div></div></td></tr>'
             }
-            tableRoomHtml+='</body>';
-            tableRoomElement.innerHTML=tableRoomHtml;
+            tableEquipmentHtml+='</body>';
+            tableEquipmentElement.innerHTML=tableEquipmentHtml;
         }else if(xhttp.status==204){
            
         }
@@ -134,7 +134,7 @@ function GetAllRoom(){
         }
     }         
     //khai báo phương thức và đường dẫn để request
-    xhttp.open("GET", "/ApiV1/AllRoom",false);
+    xhttp.open("GET", "/ApiV1/AllEquipment",false);
     //định dạng gửi đi787
     xhttp.setRequestHeader("Content-type","application/json")
     token = localStorage.getItem("Token");
@@ -143,7 +143,7 @@ function GetAllRoom(){
     xhttp.send();
 }  
 
-function Delete(RoomID){
+function Delete(EquipmentID){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() 
     {
@@ -151,7 +151,7 @@ function Delete(RoomID){
         {
             
         }else if(xhttp.status==204){
-           GetAllRoom();
+           GetAllEquipment();
         }
         else if(xhttp.status==401)
         {
@@ -165,7 +165,7 @@ function Delete(RoomID){
         }
     }         
     //khai báo phương thức và đường dẫn để request
-    xhttp.open("DELETE", "/ApiV1/RoomDetailByAdmin/"+RoomID,false);
+    xhttp.open("DELETE", "/ApiV1/EquipmentDetailByAdmin/"+EquipmentID,false);
     //định dạng gửi đi787
     xhttp.setRequestHeader("Content-type","application/json")
     token = localStorage.getItem("Token");
@@ -173,8 +173,8 @@ function Delete(RoomID){
     xhttp.setRequestHeader("Authorization",authorization);
     xhttp.send();
 }
-function editRoom(RoomID){
-    window.location="/Admin/EditRoom/"+RoomID;
+function editEquipment(EquipmentID){
+    window.location="/Admin/EditEquipment/"+EquipmentID;
 }
 //cuộn màn hình
 window.addEventListener('scroll', () => {

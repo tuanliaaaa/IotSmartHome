@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/static/css/ManagerRoomByAdmin">
+    <link rel="stylesheet" href="/static/css/ManagerRoomByAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   
@@ -17,8 +17,7 @@
                 <img src="/static/img/iconlogo.png" alt="">
             </div>
             <div class="header__nav__mavbar">
-                <ul>
-                    
+                <ul>  
                     <li>
                         <a href="/Admin/User">User</a>
                     </li>
@@ -33,8 +32,7 @@
                     </li>
                     <li>
                         <a href="/Admin/SensorAdmin">Sensor</a>
-                    </li>
-
+                    </li>             
                 </ul>
             </div>
         </div>
@@ -61,39 +59,41 @@
             <div class="container__body__content">
                 <div class="body__content__header">
                     <div class="content__header__title">
-                        <h1>User</h1>
+                        <h1>Room</h1>
                     </div>
-                    <div class="content__header__AddUser">
-                       
+                    <div class="content__header__AddRoom">
+                        <div class="AddRoom">
+                           <a href="/Admin/AddRoom"> <p>Add Room</p> </a>
+                        </div>
                     </div>
                 </div>
-                <div class="body__content__listUser">
-                    <div class="listUser__header">
-                        <div class="listUser__header__nav">
-                            <div class="listUser__header__nav__Show">
-                                <p>UserList</p>
+                <div class="body__content__listRoom">
+                    <div class="listRoom__header">
+                        <div class="listRoom__header__nav">
+                            <div class="listRoom__header__nav__Show">
+                                <p>RoomList</p>
                             </div>
-                            <div class="listUser__header__nav__Search">
-                                <div class="nav__search__User">
+                            <div class="listRoom__header__nav__Search">
+                                <div class="nav__search__Room">
                                     
-                                        <label for="search__User" >Search</label>
-                                        <input type="text" placeholder="User" id="search__User" onchange="searchUser()">
+                                        <label for="search__Room" >Search</label>
+                                        <input type="text" placeholder="Room" id="search__Room" onchange="searchRoom()">
                                     
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="listUser__body">
-                        <table id="table__Users">
+                    <div class="listRoom__body">
+                        <table id="table__Rooms">
                            
                             
                         </table>
                     </div>
-                    <div class="listUser__footer">
-                        <div class="listUser__footer__CountShow">
+                    <div class="listRoom__footer">
+                        <div class="listRoom__footer__CountShow">
                             <p>Showing entries</p>
                         </div>
-                        <div class="listUser__footer__indexPage" id="indexPage">
+                        <div class="listRoom__footer__indexPage" id="indexPage">
                             
                         </div>
                     </div>
@@ -104,7 +104,8 @@
     <div id="footer">
         
     </div>
-
+   
 </body>
-<script src="/static/js/ManagerUserByAdmin.js"></script>
+<script src="/static/js/ManagerRoomByAdmin.js"></script>
+
 </html>

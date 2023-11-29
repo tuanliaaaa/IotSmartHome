@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/static/css/ManagerUserByAdmin.css">
+    <link rel="stylesheet" href="/static/css/EditRoomByAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  
 </head>
 <body>
     <div id="header">
@@ -18,7 +17,6 @@
             </div>
             <div class="header__nav__mavbar">
                 <ul>
-                    
                     <li>
                         <a href="/Admin/User">User</a>
                     </li>
@@ -29,27 +27,27 @@
                         <a href="/Admin/RoomAdmin">Room</a>
                     </li>
                     <li>
-                        <a href="/Admin/EquipmentAdmin">Equipment</a>
+                        <a href="/Admin/EquimentAdmin">Equiments</a>
                     </li>
                     <li>
                         <a href="/Admin/SensorAdmin">Sensor</a>
                     </li>
-
+            
                 </ul>
             </div>
         </div>
-        <div class="header__userInfor">
+        <div class="header__categoryInfor">
 
-            <div class="header__userInfor__search">
-                <div id="userInfor__search">
+            <div class="header__categoryInfor__search">
+                <div id="categoryInfor__search">
                     <i class="fa-solid fa-magnifying-glass" onclick="searchApear()"></i><input type="text" placeholder="Tiltles, Characters, Genres" ><i class="fa-solid fa-xmark SEARCH"></i>
                 </div>
             </div>
-            <div class="header__userInfor__account">
-                <div class="userInfor__account__img">
+            <div class="header__categoryInfor__account">
+                <div class="categoryInfor__account__img">
                     <img src="http://occ-0-325-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABQ4A0D_KyHSDA95zx1UA0MK2HgY3_JC2ImiXV48pqZlpA1yUq8ePZdjlQF0_RdJEgT_B-z6bjjsR9jW82wgeXtIW8vM1pb8.png?r=b36" alt="">
                 </div>
-                <div class="userInfor__account__LogOut">
+                <div class="categoryInfor__account__LogOut">
                     <button onclick="LogOut()">Exit Kids</button>
                 </div>
             </div>
@@ -61,50 +59,60 @@
             <div class="container__body__content">
                 <div class="body__content__header">
                     <div class="content__header__title">
-                        <h1>User</h1>
-                    </div>
-                    <div class="content__header__AddUser">
-                       
+                        <h1>Edit Room</h1>
                     </div>
                 </div>
-                <div class="body__content__listUser">
-                    <div class="listUser__header">
-                        <div class="listUser__header__nav">
-                            <div class="listUser__header__nav__Show">
-                                <p>UserList</p>
-                            </div>
-                            <div class="listUser__header__nav__Search">
-                                <div class="nav__search__User">
-                                    
-                                        <label for="search__User" >Search</label>
-                                        <input type="text" placeholder="User" id="search__User" onchange="searchUser()">
-                                    
-                                </div>
-                            </div>
-                        </div>
+                <div class="body__content__Room">
+                    <div class="Room__infor" id="RoomEdit__inFor">
+                        
                     </div>
-                    <div class="listUser__body">
-                        <table id="table__Users">
-                           
-                            
-                        </table>
-                    </div>
-                    <div class="listUser__footer">
-                        <div class="listUser__footer__CountShow">
-                            <p>Showing entries</p>
-                        </div>
-                        <div class="listUser__footer__indexPage" id="indexPage">
-                            
+                    <div class="Save__Change">
+                        <div id="save__button" onclick="Save()">
+                            Save
                         </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="RoomByRoom">
+                <div class="listRoom__header">
+                    <div class="listRoom__header__nav">
+                        <div class="listRoom__header__nav__Show">
+                            <p>Equipment List By Room</p>
+                        </div>
+                        <div class="listRoom__header__nav__Search">
+                            <div class="nav__search__Room">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="listRoom__body">
+                    <table id="table__Rooms">
+                        <thead>
+                            <tr>
+                                <th>RoomName</th>
+                                <th>PassWord</th>
+                                <th>FullName</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                          
+                            
+                     
+                    </table>
+                </div>
+                
             </div>
         </div>
     </div>
     <div id="footer">
         
     </div>
-
 </body>
-<script src="/static/js/ManagerUserByAdmin.js"></script>
+<script src="/static/js/EditRoomByAdmin.js"></script>
+
 </html>

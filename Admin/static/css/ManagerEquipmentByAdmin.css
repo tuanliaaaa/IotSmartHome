@@ -231,77 +231,77 @@ body{
     margin: 0px;
     line-height: 1.5;
 }
-.body__content__header .content__header__AddRoom{
+.body__content__header .content__header__AddEquipment{
 
 }
-.content__header__AddRoom .AddRoom{
+.content__header__AddEquipment .AddEquipment{
     background-color: #e50914;
     padding: 5px 10px;
     border-radius: 6px;
     cursor: pointer;
 }
-.AddRoom:hover{
+.AddEquipment:hover{
     opacity: 0.7;
 }
-.AddRoom a{
+.AddEquipment a{
     text-decoration: none;
 }
-.AddRoom a p{
+.AddEquipment a p{
     color: white;
     font-size: 16px;
     line-height: 1.5;
    
 
 }
-.container__body__content .body__content__listRoom{
+.container__body__content .body__content__listEquipment{
     padding: 20px;
 }
-.body__content__listRoom .listRoom__header{
+.body__content__listEquipment .listEquipment__header{
 
 }
-.listRoom__header .listRoom__header__nav{
+.listEquipment__header .listEquipment__header__nav{
     display: flex;
     justify-content: space-between;
 }
-.listRoom__header__nav .listRoom__header__nav__Show{
+.listEquipment__header__nav .listEquipment__header__nav__Show{
 
 }
-.listRoom__header__nav__Show p{
+.listEquipment__header__nav__Show p{
     font-size: 20px;
     color: white;
     font-weight: 600;
 }
-.listRoom__header__nav .listRoom__header__nav__Search{
+.listEquipment__header__nav .listEquipment__header__nav__Search{
 
 }
-.listRoom__header__nav__Search .nav__search__Room{
+.listEquipment__header__nav__Search .nav__search__Equipment{
 
 }
-.nav__search__Room #search__Room{
+.nav__search__Equipment #search__Equipment{
 
 }
-.nav__search__Room label{
+.nav__search__Equipment label{
   
     font-size: 20px;
     margin-right: 20px;
     color: white;
     
 }
-#search__Room {
+#search__Equipment {
     background-color: #141414;
     border: none;
     padding: 10px;
     border-radius: 4%;
     color:#83878a;
 }
-#search__Room:focus{
+#search__Equipment:focus{
    
     outline: none;
 }
-.body__content__listRoom .listRoom__body{
+.body__content__listEquipment .listEquipment__body{
     padding-top: 20px;
 }
-.listRoom__body #table__Rooms{
+.listEquipment__body #table__Equipments{
     width: 100%;
     border-collapse: collapse;
 
@@ -328,59 +328,59 @@ td{
     color: white;
     font-size: 16px;
 }
-td .action__Room{
+td .action__Equipment{
     display: flex;
     text-overflow: ellipsis; 
     justify-content: space-around;
 }
 
-.action__Room i{
+.action__Equipment i{
 
 }
-.action__Room .action__Room__Edit{
+.action__Equipment .action__Equipment__Edit{
     cursor: pointer;
     color: green;
     
     
 }
-.action__Room .action__Room__Delete{
+.action__Equipment .action__Equipment__Delete{
     cursor: pointer;
     color: red;
 }
-.body__content__listRoom .listRoom__footer{
+.body__content__listEquipment .listEquipment__footer{
     margin-top: 20px;
     font-size: 16px;
     display: flex;
     justify-content: space-between;
     color: white;
 }
-.listRoom__footer .listRoom__footer__CountShow{
+.listEquipment__footer .listEquipment__footer__CountShow{
    
 
 }
-.listRoom__footer__CountShow p{
+.listEquipment__footer__CountShow p{
 
 }
-.listRoom__footer .listRoom__footer__indexPage{
+.listEquipment__footer .listEquipment__footer__indexPage{
     display: flex;
 }
-.listRoom__footer__indexPage .indexPage___prev{
+.listEquipment__footer__indexPage .indexPage___prev{
 
 }
-.listRoom__footer__indexPage p{
+.listEquipment__footer__indexPage p{
     margin-right: 10px;
     cursor: pointer;
 }
 .indexPage___prev p{
     
 }
-.listRoom__footer__indexPage .indexPage___now{
+.listEquipment__footer__indexPage .indexPage___now{
 
 }
 .indexPage___now p{
 
 }
-.listRoom__footer__indexPage .indexPage___next{
+.listEquipment__footer__indexPage .indexPage___next{
 
 }
 .indexPage___next p{

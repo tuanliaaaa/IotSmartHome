@@ -70,22 +70,22 @@ body{
     font-size: 14px;
     font-weight: 100;
 }
-#header .header__userInfor{
+#header .header__categoryInfor{
     justify-content: flex-end;
     display: flex;
     align-items: center;
     margin-right: 4%;
     flex-grow: 1;
 }
-.header__userInfor .header__userInfor__search{
+.header__categoryInfor .header__categoryInfor__search{
     
     
 }
-.header__userInfor__search #userInfor__search{
+.header__categoryInfor__search #categoryInfor__search{
     position: relative;    
 
 }
-.header__userInfor__search i:first-of-type {
+.header__categoryInfor__search i:first-of-type {
     color: white;
     top:20%;
     position: absolute;
@@ -97,7 +97,7 @@ body{
     
 }
 
-.header__userInfor__search input[type=text]{
+.header__categoryInfor__search input[type=text]{
     
     background-color: transparent;
     border: none;
@@ -109,20 +109,20 @@ body{
     padding: 6px 40px 6px 40px;
     transition: width  ease-in 0.5s;
 }
-.header__userInfor__search input[type=text]:focus{
+.header__categoryInfor__search input[type=text]:focus{
     border: none;
     width: 300px;
     background-color: #141414;
     opacity: 0.8;
     
 }
-.header__userInfor__search input[type=text]:focus ~i{
+.header__categoryInfor__search input[type=text]:focus ~i{
     right: 0.8rem;
 }
 .focus{
     left: 14px !important;
 }
-.header__userInfor__search i:last-of-type {
+.header__categoryInfor__search i:last-of-type {
     
     display: none;
     color: white;
@@ -133,7 +133,7 @@ body{
     font-size: 16px;
     cursor: pointer;
 }
-.header__userInfor__search input[type=text]:focus +i{
+.header__categoryInfor__search input[type=text]:focus +i{
     top:20%;
     position: absolute;
     display: flex;
@@ -141,23 +141,23 @@ body{
     right: 14px;
 }
 
-.header__userInfor .header__userInfor__account{
+.header__categoryInfor .header__categoryInfor__account{
     display: flex;
     align-items: center;
 }
 
-.header__userInfor__account .userInfor__account__img{
+.header__categoryInfor__account .categoryInfor__account__img{
     display: flex;
     margin: 0 10px;
     
 }
-.userInfor__account__img img{
+.categoryInfor__account__img img{
     border-radius: 4px;
 }
-.header__userInfor__account .userInfor__account__LogOut{
+.header__categoryInfor__account .categoryInfor__account__LogOut{
 
 }
-.userInfor__account__LogOut button{
+.categoryInfor__account__LogOut button{
     font-size: 14px;
     background: #e50914;
     color: #fff;
@@ -196,9 +196,9 @@ body{
 }
 
 #container{
-    background-color:  #141414; 
-    overflow: hidden;
+    background-color: #141414;
     min-height: 100vh;
+    overflow: hidden;
     
 }
 #container .container__body{
@@ -216,8 +216,6 @@ body{
 .container__body__content .body__content__header{
     padding: 20px;
     border-bottom: 2px solid #141414;
-    display: flex;
-    justify-content: space-between;
 }
 .body__content__header .content__header__title{
 
@@ -226,82 +224,130 @@ body{
     color: white;
     
     font-size: 24px;
-   
+    font-family: 'Roboto', sans-serif;
     font-weight: 600;
     margin: 0px;
     line-height: 1.5;
 }
-.body__content__header .content__header__AddRoom{
-
-}
-.content__header__AddRoom .AddRoom{
-    background-color: #e50914;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-.AddRoom:hover{
-    opacity: 0.7;
-}
-.AddRoom a{
-    text-decoration: none;
-}
-.AddRoom a p{
-    color: white;
-    font-size: 16px;
-    line-height: 1.5;
-   
-
-}
-.container__body__content .body__content__listRoom{
+.container__body__content .body__content__Equipment{
     padding: 20px;
 }
-.body__content__listRoom .listRoom__header{
+.body__content__Equipment .Equipment__infor{
 
 }
-.listRoom__header .listRoom__header__nav{
+.Equipment__infor .Equipment__infor__EquipmentName{
+
+}
+.Equipment__infor .Equipment__infor__FullName{
+
+}
+.Equipment__infor .Equipment__infor__Password{
+
+}
+.Equipment__infor label{
+    padding: 10px;
+    
+    font-size: 20px;
+    color:#e5e5e5;
+}
+.Equipment__infor input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 8px;
+    background-color: #141414;
+    outline: none;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    color: white;
+}
+.Equipment__infor select{
+    margin-top: 10px;
+    width: 100%;
+    background-color: #141414;
+    color: white;
+    padding: 16px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+.body__content__Equipment .Save__Change{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+.Save__Change #save__button{
+    color: white;
+    font-size: 16px;
+    background-color: #e50914;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 60px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.container__body .EquipmentByEquipment{
+    border-top: 2px solid #141414;
+    padding: 20px;
+    width: 96%;
+    margin: auto;
+    margin-top: 40px;
+     background-color:#191919;
+}
+
+.EquipmentByEquipment .listEquipment__header{
+    width: 96%;
+    margin: auto;
+     background-color:#191919;
+}
+.listEquipment__header .listEquipment__header__nav{
     display: flex;
     justify-content: space-between;
 }
-.listRoom__header__nav .listRoom__header__nav__Show{
+.listEquipment__header__nav .listEquipment__header__nav__Show{
 
 }
-.listRoom__header__nav__Show p{
+.listEquipment__header__nav__Show p{
     font-size: 20px;
     color: white;
     font-weight: 600;
 }
-.listRoom__header__nav .listRoom__header__nav__Search{
+.listEquipment__header__nav .listEquipment__header__nav__Search{
 
 }
-.listRoom__header__nav__Search .nav__search__Room{
+.listEquipment__header__nav__Search .nav__search__Equipment{
 
 }
-.nav__search__Room #search__Room{
+.nav__search__Equipment #search__Equipment{
 
 }
-.nav__search__Room label{
+.nav__search__Equipment label{
   
     font-size: 20px;
     margin-right: 20px;
     color: white;
     
 }
-#search__Room {
+#search__Equipment {
     background-color: #141414;
     border: none;
     padding: 10px;
     border-radius: 4%;
     color:#83878a;
 }
-#search__Room:focus{
+#search__Equipment:focus{
    
     outline: none;
 }
-.body__content__listRoom .listRoom__body{
+.EquipmentByEquipment .listEquipment__body{
     padding-top: 20px;
 }
-.listRoom__body #table__Rooms{
+.listEquipment__body #table__Equipments{
     width: 100%;
     border-collapse: collapse;
 
@@ -312,11 +358,15 @@ thead,tbody{
 
 }
 th,tr,td{
+    
     text-align: center;
     font-size: 20px;
     font-size: 100;
     border: none;
     background-color: #141414;
+    
+}
+th{
     line-height: 50px;
 }
 tr{
@@ -325,68 +375,95 @@ tr{
     font-size: 18px;
 }
 td{
+    height: 60px;
     color: white;
     font-size: 16px;
+    text-align: center;
+    
+  
 }
-td .action__Room{
+td .action__Equipment{
     display: flex;
     text-overflow: ellipsis; 
     justify-content: space-around;
 }
 
-.action__Room i{
-
+td p{
+    text-align: center;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-height: 200px;    
+    margin:auto;
 }
-.action__Room .action__Room__Edit{
+td .imgEquipment{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+} 
+td .imgEquipment img{
+    width: 100px;
+   
+    object-fit: cover;
+}
+.action__Equipment i{
+    color: green;
+}
+.action__Equipment .action__Equipment__Edit{
     cursor: pointer;
     color: green;
     
     
 }
-.action__Room .action__Room__Delete{
+.action__Equipment__Edit a{
+    text-decoration: none;
+    color: green;
+}
+.action__Equipment .action__Equipment__Delete{
     cursor: pointer;
     color: red;
 }
-.body__content__listRoom .listRoom__footer{
+.EquipmentByEquipment .listEquipment__footer{
     margin-top: 20px;
     font-size: 16px;
     display: flex;
     justify-content: space-between;
     color: white;
 }
-.listRoom__footer .listRoom__footer__CountShow{
+.listEquipment__footer .listEquipment__footer__CountShow{
    
 
 }
-.listRoom__footer__CountShow p{
+.listEquipment__footer__CountShow p{
 
 }
-.listRoom__footer .listRoom__footer__indexPage{
+.listEquipment__footer .listEquipment__footer__indexPage{
     display: flex;
 }
-.listRoom__footer__indexPage .indexPage___prev{
+.listEquipment__footer__indexPage .indexPage___prev{
 
 }
-.listRoom__footer__indexPage p{
+.listEquipment__footer__indexPage p{
     margin-right: 10px;
     cursor: pointer;
 }
 .indexPage___prev p{
     
 }
-.listRoom__footer__indexPage .indexPage___now{
+.listEquipment__footer__indexPage .indexPage___now{
 
 }
 .indexPage___now p{
 
 }
-.listRoom__footer__indexPage .indexPage___next{
+.listEquipment__footer__indexPage .indexPage___next{
 
 }
 .indexPage___next p{
 
 }
 #footer{
-    /* height: 100px;
-    background-color: #141414; */
+    height: 100px;
+    background-color: #141414;
 }

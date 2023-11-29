@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/AddRoomByAdmin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="header">
+      <div class="header__nav">
+        <div class="header__nav__logo">
+          <img src="/static/img/iconlogo.png" alt="" />
+        </div>
+        <div class="header__nav__mavbar">
+          <ul>
+            <li>
+              <a href="/Admin/User">User</a>
+            </li>
+            <li>
+              <a href="/Admin/HomeAdmin">Home</a>
+            </li>
+            <li>
+              <a href="/Admin/RoomAdmin">Room</a>
+            </li>
+            <li>
+              <a href="/Admin/EquimentAdmin">Equiments</a>
+            </li>
+            <li>
+              <a href="/Admin/SensorAdmin">Sensor</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="header__categoryInfor">
+        <div class="header__categoryInfor__search">
+          <div id="categoryInfor__search">
+            <i class="fa-solid fa-magnifying-glass" onclick="searchApear()"></i
+            ><input type="text" placeholder="Tiltles, Characters, Genres" /><i
+              class="fa-solid fa-xmark SEARCH"
+            ></i>
+          </div>
+        </div>
+        <div class="header__categoryInfor__account">
+          <div class="categoryInfor__account__img">
+            <img
+              src="http://occ-0-325-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABQ4A0D_KyHSDA95zx1UA0MK2HgY3_JC2ImiXV48pqZlpA1yUq8ePZdjlQF0_RdJEgT_B-z6bjjsR9jW82wgeXtIW8vM1pb8.png?r=b36"
+              alt=""
+            />
+          </div>
+          <div class="categoryInfor__account__LogOut">
+            <button onclick="LogOut()">Exit Kids</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="container__body">
+        <div class="container__body__content">
+          <div class="body__content__header">
+            <div class="content__header__title">
+              <h1>ADD Room</h1>
+            </div>
+          </div>
+          <div class="body__content__Room">
+            <div class="Room__infor" id="RoomEdit__inFor">
+              <div class="Room__infor" id="RoomEdit__inFor">
+                <div class="Room__infor__RoomName">
+                  <label for="RoomName">RoomName</label
+                  ><input type="text" id="RoomName" />
+                </div>
+                <div class="Room__infor__HomeName">
+                  <label for="Home">Home</label
+                  ><select id="Home">
+                    
+                  </select>
+                </div>
+                <div class="Room__infor__RoomAdmin">
+                    <label for="RoomAdmin">RoomAdmin</label
+                    ><select id="RoomAdmin">
+                      
+                    </select>
+                  </div>
+              </div>
+            </div>
+            <div class="Save__Change">
+              <div id="save__button" onclick="Save()">Save</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer"></div>
+  </body>
+  <script src="/static/js/AddRoomByAdmin.js"></script>
+</html>
