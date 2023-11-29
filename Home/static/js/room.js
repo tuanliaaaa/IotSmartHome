@@ -150,3 +150,72 @@ function unshow(){
 document.querySelector("#logger .logger__content").addEventListener('click', function(event) {
     event.stopPropagation(); 
 });
+
+
+getMode();
+function getMode() {
+    // Tạo một đối tượng XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if ( xhr.status == 200) {
+            var ResponseJson = xhr.responseText;
+            var Response= JSON.parse(ResponseJson)
+            console.log('Success:', Response);
+
+            // Cập nhật giá trị của input range
+            document.getElementById('ModeStatus').value = Response['StatusMode'];
+        }else if(xhr.status==401)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }
+        else if(xhr.status==403)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }
+    };
+    xhr.open('GET', '/ApiV1/ModeByUser', true);
+    xhr.setRequestHeader("Content-type","application/json")
+    token = localStorage.getItem("Token");
+    authorization ='Bearer '+token
+    xhr.setRequestHeader("Authorization",authorization);
+
+    // Gửi yêu cầu
+    xhr.send();
+}
+document.getElementById('ModeStatus').addEventListener('input',UpdateMode);
+function UpdateMode() {
+   
+    var modeValue = document.getElementById('ModeStatus').value;
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if ( xhr.status == 200) {
+            var ResponseJson = xhr.responseText;
+            var Response= JSON.parse(ResponseJson)
+            console.log('Success:', Response);
+
+            // Cập nhật giá trị của input range
+            document.getElementById('ModeStatus').value = Response['StatusMode'];
+        }else if(xhr.status==401)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }
+        else if(xhr.status==403)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }
+    };
+
+    xhr.open('PATCH', '/ApiV1/ModeByUser', true);
+    xhr.setRequestHeader("Content-type","application/json")
+    token = localStorage.getItem("Token");
+    authorization ='Bearer '+token
+    xhr.setRequestHeader("Authorization",authorization);
+    modeValueJson= JSON.stringify({"StatusMode":modeValue});
+    xhr.send(modeValueJson);
+}

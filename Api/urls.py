@@ -6,6 +6,7 @@ from .Views.Dubao import Recommend
 from .Views.token import Token
 from .Views.UserViewByAdmin import AllUserByAdmin,UserById,SearchUserByAdmin,UserDetailByAdmin
 from .Views.User import UserByLogin
+from .Views.ModeView import ModeByUser
 urlpatterns = [
     path('HomeByUserID/<int:userID>',HomeByUserId.as_view()),
     path('RoomByHomeID/<int:homeID>',RoomByHomeId.as_view()),
@@ -15,6 +16,8 @@ urlpatterns = [
     path('User/Token',Token.as_view()),
     path('UserByID/<int:UserID>',UserById.as_view()),
 
+
+    path('ModeByUser',ModeByUser.as_view()),
 
     
     path('UserByLogin',UserByLogin.as_view()),
