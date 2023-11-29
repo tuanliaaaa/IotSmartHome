@@ -1,6 +1,64 @@
-getHumiditi();
-getTemprature();
-getAllEquipment();
+var RoleList=[];
+function isRoleNameExist(roles, roleNameToCheck) {
+    return roles.some(role => role.RoleName === roleNameToCheck);
+}
+if(localStorage.getItem("Token")){   
+    checkUserLogin().then((result) => {
+        RoleList=result;
+        const roleNameToCheck = "User";
+        if (isRoleNameExist(RoleList, roleNameToCheck)) {
+            getAllEquipment();
+            getTemprature();
+            getHumiditi();
+        } else {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }
+    });;
+}else{
+    window.location="/Login";
+}
+
+function getUserLoginFetch() {
+    return new Promise((resolve, reject) => {
+        //khai báo phương thức và đường dẫn để request
+        fetch("/ApiV1/UserByLogin", {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("Token")
+            },
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else if (response.status === 204) {
+                resolve([]); // Trả về một mảng rỗng nếu không có dữ liệu
+            } else if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("Token");
+                window.location = "/Login";
+            } else {
+                reject("Error fetching data");
+            }
+        })
+        .then(data => {
+            resolve(data);
+        })
+        .catch(error => {
+            reject(error);
+        });
+    });
+}
+async function checkUserLogin(){
+    var userLogin=await getUserLoginFetch(); 
+    return userLogin["roles"];
+}
+
+function LogOut(){
+    window.location="/Login";
+    localStorage.removeItem("Token");
+}
+
 function toggleNav() {
     var navigation = document.querySelector('#navbar .navigation');
     var menuIcon = document.querySelector('#navbar .menu-button');

@@ -7,7 +7,7 @@ if(localStorage.getItem("Token")){
         RoleList=result;
         const roleNameToCheck = "Admin";
         if (isRoleNameExist(RoleList, roleNameToCheck)) {
-            GetUser();
+            GetAllHome();
         } else {
             localStorage.removeItem("Token");
             window.location="/Admin/Login";
@@ -55,19 +55,70 @@ function LogOut(){
     window.location="/Admin/Login";
     localStorage.removeItem("Token");
 }
-function GetUser(){
+function searchHome()
+{
+    var Homename =document.getElementById('search__Home').value;
+    if(Homename=='')
+    {
+        GetAllHome();
+    }else{
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() 
+        {
+            if(xhttp.status==200)
+            {
+                var ResponseJson=xhttp.responseText
+                var Response= JSON.parse(ResponseJson)
+                var tableHomeElement = document.getElementById('table__Homes');
+                
+                var tableHomeHtml ='<thead><tr><th>HomeName</th><th>UserName</th><th>Action</th></tr></thead><tbody>';
+                for (var i =0;i<Response.length;i++){
+                    tableHomeHtml+='<tr><td>'+Response[i].HomeName+'</td><td>'+Response[i].User.FullName+'</td><td><div class="action__Home"><div class="action__Home__Edit"><i class="fa-solid fa-pen-to-square" onclick="editHome('+Response[i].id+')"></i></div><div class="action__Home__Delete"><i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div></div></td></tr>'
+                }
+                tableHomeHtml+='</body>';
+                tableHomeElement.innerHTML=tableHomeHtml;
+            }else if(xhttp.status==204){
+               
+            }
+            else if(xhttp.status==401)
+            {
+                localStorage.removeItem("Token");
+                window.location="/Admin/Login";
+            }
+            else if(xhttp.status==403)
+            {
+                localStorage.removeItem("Token");
+                window.location="/Admin/Login";
+            }
+        }         
+        //khai báo phương thức và đường dẫn để request
+        xhttp.open("GET", "/ApiV1/SearchHomeByAdmin/"+Homename,false);
+        //định dạng gửi đi787
+        xhttp.setRequestHeader("Content-type","application/json")
+        token = localStorage.getItem("Token");
+        authorization ='Bearer '+token
+        xhttp.setRequestHeader("Authorization",authorization);
+        xhttp.send();
+    }
+}
+function GetAllHome(){
     
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() 
     {
         if(xhttp.status==200)
         {
-        var ResponseJson=xhttp.responseText;
-        var Response= JSON.parse(ResponseJson);
-        console.log(Response)
-          var userByIDElement =document.getElementById('userEdit__inFor');
-          var userByIDHtml='<div class="User__infor__UserName"><label for="UserName">UserName</label><input type="text" id="UserName" value="'+Response.UserName+'"></div><div class="User__infor__FullName"><label for="FullName">FullName</label><input type="text" id="FullName" value="'+Response.FullName+ '"></div><div class="User__infor__Password"><label for="Password">Password</label><input type="text" id="Password" value="'+Response.Password+'"> </div>';
-          userByIDElement.innerHTML=userByIDHtml;
+            var ResponseJson=xhttp.responseText
+            var Response= JSON.parse(ResponseJson)
+            var tableHomeElement = document.getElementById('table__Homes');
+           
+            
+            var tableHomeHtml ='<thead><tr><th>HomeName</th><th>UserName</th><th>Action</th></tr></thead><tbody>';
+            for (var i =0;i<Response.length;i++){
+                tableHomeHtml+='<tr><td>'+Response[i].HomeName+'</td><td>'+Response[i].User['FullName']+'</td><td><div class="action__Home"><div class="action__Home__Edit" ><i class="fa-solid fa-pen-to-square" onclick="editHome('+Response[i].id+')"></i> </div><div class="action__Home__Delete"><i class="fa-solid fa-trash"onclick="Delete('+Response[i].id+')" ></i></div></div></td></tr>'
+            }
+            tableHomeHtml+='</body>';
+            tableHomeElement.innerHTML=tableHomeHtml;
         }else if(xhttp.status==204){
            
         }
@@ -83,7 +134,38 @@ function GetUser(){
         }
     }         
     //khai báo phương thức và đường dẫn để request
-    xhttp.open("GET", "/ApiV1/UserDetailByAdmin/"+window.location.pathname.substring(16),false);
+    xhttp.open("GET", "/ApiV1/AllHome",false);
+    //định dạng gửi đi787
+    xhttp.setRequestHeader("Content-type","application/json")
+    token = localStorage.getItem("Token");
+    authorization ='Bearer '+token
+    xhttp.setRequestHeader("Authorization",authorization);
+    xhttp.send();
+}  
+
+function Delete(homeID){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() 
+    {
+        if(xhttp.status==200)
+        {
+            
+        }else if(xhttp.status==204){
+           GetAllHome();
+        }
+        else if(xhttp.status==401)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Admin/Login";
+        }
+        else if(xhttp.status==403)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Admin/Login";
+        }
+    }         
+    //khai báo phương thức và đường dẫn để request
+    xhttp.open("DELETE", "/ApiV1/HomeDetailByAdmin/"+homeID,false);
     //định dạng gửi đi787
     xhttp.setRequestHeader("Content-type","application/json")
     token = localStorage.getItem("Token");
@@ -91,42 +173,8 @@ function GetUser(){
     xhttp.setRequestHeader("Authorization",authorization);
     xhttp.send();
 }
-function Save(){
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() 
-    {
-        if(xhttp.status==200)
-        {
-            window.location='/Admin/User'
-        }else if(xhttp.status==204){
-           
-        }
-        else if(xhttp.status==401)
-        {
-            localStorage.removeItem("Token");
-            window.location="/Admin/Login";
-        }
-        else if(xhttp.status==403)
-        {
-            localStorage.removeItem("Token");
-            window.location="/Admin/Login";
-        }
-    }         
-    const userPost ={
-        UserName:document.getElementById('UserName').value,
-        Password: document.getElementById('Password').value,
-        FullName: document.getElementById('FullName').value
-    }
-    
-    var userPostJson =JSON.stringify(userPost);
-    //khai báo phương thức và đường dẫn để request
-    xhttp.open("PATCH", "/ApiV1/UserDetailByAdmin/"+window.location.pathname.substring(16),false);
-    //định dạng gửi đi787
-    xhttp.setRequestHeader("Content-type","application/json")
-    token = localStorage.getItem("Token");
-    authorization ='Bearer '+token
-    xhttp.setRequestHeader("Authorization",authorization);
-    xhttp.send(userPostJson);
+function editHome(homeID){
+    window.location="/Admin/EditHome/"+homeID;
 }
 //cuộn màn hình
 window.addEventListener('scroll', () => {
@@ -148,5 +196,4 @@ search.addEventListener("blur",function(){
 function searchApear(){
     document.querySelector(".header__userInfor__search input").focus();
 }
-
 

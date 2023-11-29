@@ -9,6 +9,7 @@ if(localStorage.getItem("Token")){
         if (isRoleNameExist(RoleList, roleNameToCheck)) {
             GetAllUser();
         } else {
+            localStorage.removeItem("Token");
             window.location="/Admin/Login";
         }
     });;

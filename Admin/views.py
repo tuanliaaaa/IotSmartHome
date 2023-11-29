@@ -17,10 +17,17 @@ class RoomAdmin(View):
         return render(request,"ManagerRoomByAdmin.html")
 class HomeAdmin(View):
     def get(self,request):
-        return render(request,"HomeAdmin.html")
+        return render(request,"ManagerHomeByAdmin.html")
 class SensorAdmin(View):
     def get(self,request):
         return render(request,"SensorAdmin.html")
 class EquimentAdmin(View):
     def get(self,request):
         return render(request,"EquimentAdmin.html")
+class EditHome(View):
+    def get(self,request,HomeID):
+        return render(request,'EditHomeByAdmin.html') 
+class AddHome(View):
+    def get(self,request):
+        return render(request,'AddHomeByAdmin.html') 
+    

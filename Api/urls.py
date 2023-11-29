@@ -1,6 +1,6 @@
 from django.urls import path
 from .Views.EquipmentView import EquipmentByRoomId,EquipmentById
-from .Views.HomeView import HomeByUserLogin
+from .Views.HomeView import HomeByUserLogin,AllHome,SearchHomeByAdmin,HomeDetailByAdmin
 from .Views.RoomView import RoomByHomeId
 from .Views.Dubao import Recommend
 from .Views.token import Token
@@ -24,4 +24,10 @@ urlpatterns = [
     path('AllUserByAdmin',AllUserByAdmin.as_view()),
     path('SearchUserByAdmin/<str:Username>',SearchUserByAdmin.as_view()),
     path('UserDetailByAdmin/<str:UserID>',UserDetailByAdmin.as_view()),
+
+    path('AllHome',AllHome.as_view()),
+    path('SearchHomeByAdmin/<str:HomeName>',SearchHomeByAdmin.as_view()),
+    path('HomeDetailByAdmin/<str:HomeID>',HomeDetailByAdmin.as_view()),
+
+
 ]

@@ -1,5 +1,3 @@
-getTemprature();
-getHumiditi();
 var RoleList=[];
 function isRoleNameExist(roles, roleNameToCheck) {
     return roles.some(role => role.RoleName === roleNameToCheck);
@@ -10,7 +8,10 @@ if(localStorage.getItem("Token")){
         const roleNameToCheck = "User";
         if (isRoleNameExist(RoleList, roleNameToCheck)) {
             allroom();
+            getTemprature();
+            getHumiditi();
         } else {
+            localStorage.removeItem("Token");   
             window.location="/Login";
         }
     });;
