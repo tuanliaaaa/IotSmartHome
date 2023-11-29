@@ -1,21 +1,21 @@
 from Entity.models.Home import Home
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from Serializer.HomeSerializer import HomeSerializer
+from Serializer.HomeSerializer import HomeRoomsAndSerializer
 from django.db.models import Q
-
+from core.roleLoginDecorater import RoleRequest
 from django.utils.decorators import method_decorator
 
-class HomeByUserId(APIView):
-    def get(self,request,userID):
+class HomeByUserLogin(APIView):
+    @method_decorator(RoleRequest(allowedRoles=['Admin','User']))
+    def get(self,request):
         try:
-            homeList = Home.objects.filter(User__pk = userID)
+            homeList = Home.objects.filter(User__pk = request.userID)
             
         except:
-            return Response({"massage":"Nhà không tồn tại"},status=204)
+            return Response({"massage":"Nhà không tồn tại"},status=404)
         
-        homeListSerializer = HomeSerializer(homeList,many = True)
-        print(homeListSerializer)
+        homeListSerializer = HomeRoomsAndSerializer(homeList,many = True)
         return Response(homeListSerializer.data,status=200)
     
 

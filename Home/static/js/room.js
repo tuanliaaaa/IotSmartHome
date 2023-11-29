@@ -1,5 +1,61 @@
 getTemprature();
 getHumiditi();
+var RoleList=[];
+function isRoleNameExist(roles, roleNameToCheck) {
+    return roles.some(role => role.RoleName === roleNameToCheck);
+}
+if(localStorage.getItem("Token")){   
+    checkUserLogin().then((result) => {
+        RoleList=result;
+        const roleNameToCheck = "User";
+        if (isRoleNameExist(RoleList, roleNameToCheck)) {
+            allroom();
+        } else {
+            window.location="/Login";
+        }
+    });;
+}else{
+    window.location="/Login";
+}
+function getUserLoginFetch() {
+    return new Promise((resolve, reject) => {
+        //khai báo phương thức và đường dẫn để request
+        fetch("/ApiV1/UserByLogin", {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("Token")
+            },
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else if (response.status === 204) {
+                resolve([]); // Trả về một mảng rỗng nếu không có dữ liệu
+            } else if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("Token");
+                window.location = "/Login";
+            } else {
+                reject("Error fetching data");
+            }
+        })
+        .then(data => {
+            resolve(data);
+        })
+        .catch(error => {
+            reject(error);
+        });
+    });
+}
+async function checkUserLogin(){
+    var userLogin=await getUserLoginFetch(); 
+    return userLogin["roles"];
+}
+
+function LogOut(){
+    window.location="/Login";
+    localStorage.removeItem("Token");
+}
 function toggleNav() {
     var navigation = document.querySelector('#navbar .navigation');
     var menuIcon = document.querySelector('#navbar .menu-button');
@@ -27,7 +83,7 @@ var navigation = document.querySelector("#navbar .navigation");
 navigation.addEventListener("click",(e)=>{
     e.stopPropagation();
 })
-allroom();
+
 function allroom(){
     const xhttp = new XMLHttpRequest();
         //nhận dự liệu về (http response)
@@ -46,12 +102,12 @@ function allroom(){
                 for(var i=0;i<Response.length;i++){
                     s1+='<li><div class = "homename"><span>'+Response[i]['HomeName']+'</span></div><div class="listRoom"><ul>'
                     for(var j =0;j<Response[i]['rooms'].length;j++){
-                        s1+='<li onclick="roomDetail('+j+')">'
+                        s1+='<li onclick="roomDetail('+Response[i]['rooms'][j]['id']+')">'
                         +'<div class="roomDetail">'
                           +'  <div class="roomDetail__logo">'
                                 +'<div class="logo__content"></div>'
                                 +'<div class="logo__img">'
-                                    +'<img src="/static/img/device.jpg" alt="">'
+                                    +'<img src="Home/Media/Image/'+Response[i]['rooms'][j]['RoomAdmin']['RoomAdminImg']+'" alt="">'
                                 +'</div>'
                             +'</div>'
                             +'<div class="roomDetail__content">'
@@ -73,9 +129,12 @@ function allroom(){
             }
         }         
         //khai báo phương thức và đường dẫn để request
-        xhttp.open("GET", "http://127.0.0.1:8000/ApiV1/HomeByUserID/1",false);
+        xhttp.open("GET", "http://127.0.0.1:8000/ApiV1/HomeByUserLogin",false);
         //định dạng gửi đi787
         xhttp.setRequestHeader("Content-type","application/json")
+        token = localStorage.getItem("Token");
+        authorization ='Bearer '+token
+        xhttp.setRequestHeader("Authorization",authorization);
         xhttp.send();
 }
 function getTemprature(){

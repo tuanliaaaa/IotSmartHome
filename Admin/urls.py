@@ -5,4 +5,5 @@ urlpatterns = [
     path('User',Admin.as_view()),
     path('Login',loginAdmin.as_view()),
     path('EditUser/<int:UserID>',EditUser.as_view()),
+    path('RoomAdmin',RoomAdmin.as_view())
 ]

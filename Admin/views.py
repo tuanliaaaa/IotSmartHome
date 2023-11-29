@@ -14,7 +14,7 @@ class EditUser(View):
         return render(request,'EditUserByAdmin.html') 
 class RoomAdmin(View):
     def get(self,request):
-        return render(request,"RoomAdmin.html")
+        return render(request,"ManagerRoomByAdmin.html")
 class HomeAdmin(View):
     def get(self,request):
         return render(request,"HomeAdmin.html")

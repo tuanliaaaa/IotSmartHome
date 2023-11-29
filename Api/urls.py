@@ -1,6 +1,6 @@
 from django.urls import path
 from .Views.EquipmentView import EquipmentByRoomId,EquipmentById
-from .Views.HomeView import HomeByUserId
+from .Views.HomeView import HomeByUserLogin
 from .Views.RoomView import RoomByHomeId
 from .Views.Dubao import Recommend
 from .Views.token import Token
@@ -8,7 +8,7 @@ from .Views.UserViewByAdmin import AllUserByAdmin,UserById,SearchUserByAdmin,Use
 from .Views.User import UserByLogin
 from .Views.ModeView import ModeByUser
 urlpatterns = [
-    path('HomeByUserID/<int:userID>',HomeByUserId.as_view()),
+    path('HomeByUserLogin',HomeByUserLogin.as_view()),
     path('RoomByHomeID/<int:homeID>',RoomByHomeId.as_view()),
     path('EquipmenByRoomID/<int:roomID>',EquipmentByRoomId.as_view()),
     path('EquipmentByID/<int:equipmentID>',EquipmentById.as_view()),
@@ -19,7 +19,7 @@ urlpatterns = [
 
     path('ModeByUser',ModeByUser.as_view()),
 
-    
+
     path('UserByLogin',UserByLogin.as_view()),
     path('AllUserByAdmin',AllUserByAdmin.as_view()),
     path('SearchUserByAdmin/<str:Username>',SearchUserByAdmin.as_view()),
