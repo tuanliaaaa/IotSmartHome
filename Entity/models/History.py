@@ -7,3 +7,5 @@ class History(models.Model):
     Humidity= models.FloatField(null=True, blank=True)
     Equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE,related_name='histories')
     User = models.ForeignKey(User,on_delete=models.CASCADE)
+    StatusRoom = models.CharField(max_length=225,null=True)
+    Time = models.DateTimeField(null=True)

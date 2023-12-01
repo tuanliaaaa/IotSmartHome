@@ -12,15 +12,15 @@
         <div class="logger__content">
             <div class="loggercontent__body">
                 <div class="loggerbody__ListImg">
-                    <div class="loggerImg__micro">
+                    <div class="loggerImg__micro" id="voiceFromMic">
                         <img src="/static/img/mic.png" alt="">
                     </div>
                     <div class="loggerImg__sound" >
                         <img src="/static/img/supersonic.png" alt="">
                     </div>
                 </div>
-                <div class="loggerbody__Text">
-                    <h4> bạn đang nói gì v</h4>
+                <div class="loggerbody__Text" id="textFromMic">
+                    Hãy nói gì đó
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                             <input type="range" id="ModeStatus" name="ModeStatus" min="0" max="3" step="1" value="0" >                              
                         </div>
                         <div class="mode_voice" onclick="showvoice()">
-                            <div class="voice__img">
+                            <div class="voice__img" >
                                 <img src="/static/img/mic.png" alt="">
                             </div>
                         </div>

@@ -279,3 +279,25 @@ function UpdateMode() {
     modeValueJson= JSON.stringify({"StatusMode":modeValue});
     xhr.send(modeValueJson);
 }
+const startButton = document.getElementById('voiceFromMic');
+const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+recognition.lang = 'vi-VN'; // Chọn ngôn ngữ (ví dụ: tiếng Việt)
+const outputTextFromMic = document.getElementById('textFromMic');
+startButton.addEventListener('click',()=>{
+    outputTextFromMic.textContent = `Loading....`;
+
+    startButton.classList.add('active');
+    recognition.start();
+
+    recognition.onresult = (event) => {
+        startButton.classList.remove('active');
+        const result = event.results[0][0].transcript;
+        outputTextFromMic.textContent = `${result}`;
+    };
+
+    recognition.onerror = (event) => {
+        outputTextFromMic.textContent = `Vui lòng nhắc lại`;
+
+    };
+})
+

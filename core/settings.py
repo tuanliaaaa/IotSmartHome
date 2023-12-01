@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Home',
     'Entity',
     'Serializer',
+    'SuperAdmin',
     'Admin'
 ]
 
