@@ -12,7 +12,7 @@ class Room(View):
 class EquipmentByRoom(View):
     def get(self,request,roomID):
         return render(request,'Equipment.html')
-class Alarm(View):
+class EquipmentDetail(View):
     def get(self,request,equimentID):
         return render(request,'Alarm.html')   
 def image_view(request, image_name):

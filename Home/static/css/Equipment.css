@@ -160,7 +160,8 @@ body {
     flex-grow: 1;
     
     border-radius: 5px;
-    min-height: 80vh;
+    height: 80vh;
+    overflow: scroll;
     margin-top: 5px;
 }
 ::-webkit-scrollbar {
@@ -201,6 +202,7 @@ ul li .deviceDetail{
     border-radius: 5px;
     padding: 5px;
     margin-right: 20px;
+    cursor: pointer;
 }
 .deviceLabel p{
     padding: 5px;

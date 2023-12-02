@@ -11,6 +11,7 @@ from .Views.RoomAdminView import AllRoomAdmin
 from .Views.EquipmentAdmView import AllEquipment,SearchEquipmentByAdmin,EquipmentDetailByAdmin
 from .Views.EquipmentAdminView import AllEquipmentAdmin
 from .Views.SensorView import AllSensor,SearchSensorByAdmin,SensorDetailByAdmin
+from .Views.ClockView import ClockAll,ClockByID
 urlpatterns = [
     path('HomeByUserLogin',HomeByUserLogin.as_view()),
     path('RoomByHomeID/<int:homeID>',RoomByHomeId.as_view()),
@@ -48,6 +49,10 @@ urlpatterns = [
     path('AllSensor',AllSensor.as_view()),
     path('SearchSensorByAdmin/<str:SensorName>',SearchSensorByAdmin.as_view()),
     path('SensorDetailByAdmin/<str:SensorID>',SensorDetailByAdmin.as_view()),
+
+    path('ClockAll',ClockAll.as_view()),
+    path('ClockByID/<int:equipmentID>',ClockByID.as_view()),
+
 
 
 ]

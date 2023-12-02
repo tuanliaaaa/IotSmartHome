@@ -160,8 +160,7 @@ body {
     flex-grow: 1;
     
     border-radius: 5px;
-    height: 80vh;
-    overflow: scroll;
+    min-height: 80vh;
     margin-top: 5px;
 }
 ::-webkit-scrollbar {
@@ -268,12 +267,11 @@ input:checked + .toggle-slider:before {
     padding : 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 #alarm .clock {
     display :flex;
     margin : 20px;
-    width: 40%;
+    width: 30%;
     /* text-align: center; */
     padding: 20px;
     background-color: #fff;

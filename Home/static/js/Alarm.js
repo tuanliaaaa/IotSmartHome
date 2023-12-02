@@ -1,30 +1,339 @@
+var RoleList=[];
+function isRoleNameExist(roles, roleNameToCheck) {
+    return roles.some(role => role.RoleName === roleNameToCheck);
+}
+if(localStorage.getItem("Token")){   
+    checkUserLogin().then((result) => {
+        RoleList=result;
+        const roleNameToCheck = "User";
+        if (isRoleNameExist(RoleList, roleNameToCheck)) {
+            getEquipmentByID();
+            getAlarm();
+            getTemprature();
+            getHumiditi();
+        } else {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }
+    });;
+}else{
+    window.location="/Login";
+}
 
-getEquipment();
-function getEquipment(){
-    const xhttp = new XMLHttpRequest();
-        //nhận dự liệu về (http response)
+function getUserLoginFetch() {
+    return new Promise((resolve, reject) => {
+        //khai báo phương thức và đường dẫn để request
+        fetch("/ApiV1/UserByLogin", {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("Token")
+            },
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else if (response.status === 204) {
+                resolve([]); // Trả về một mảng rỗng nếu không có dữ liệu
+            } else if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("Token");
+                window.location = "/Login";
+            } else {
+                reject("Error fetching data");
+            }
+        })
+        .then(data => {
+            resolve(data);
+        })
+        .catch(error => {
+            reject(error);
+        });
+    });
+}
+async function checkUserLogin(){
+    var userLogin=await getUserLoginFetch(); 
+    return userLogin["roles"];
+}
+
+function LogOut(){
+    window.location="/Login";
+    localStorage.removeItem("Token");
+}
+
+function toggleNav() {
+    var navigation = document.querySelector('#navbar .navigation');
+    var menuIcon = document.querySelector('#navbar .menu-button');
+    var navbar = document.getElementById("navbar");
+    navbar.classList.add("unshow");
+    menuIcon.classList.add("hidden");
+    navigation.style.left = '0';
+}
+var navbar = document.getElementById("navbar");
+navbar.addEventListener("click",(e)=>{
+    if(e.target.classList.contains("unshow")){  
+        e.target.classList.remove("unshow");
+        var navigation = document.querySelector('#navbar .navigation');
+        setTimeout(()=>{
+            menuIcon.classList.remove("hidden");
+        },200);
+        navigation.style.left = '-255px';
+        var menuIcon = document.querySelector('#navbar .menu-button');
+    }else{
+
+    }
+   
+})
+var navigation = document.querySelector("#navbar .navigation");
+navigation.addEventListener("click",(e)=>{
+    e.stopPropagation();
+})
+function getTemprature(){
+    const socket = new WebSocket('ws://127.0.0.1:8000/ws/temprature/');  
+    socket.addEventListener('open', (event) => {
+        // console.log('WebSocket connection opened:', event);
+        socket.send("Connect to Server")
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+        // console.log('WebSocket message received:', event.data);
+        try{
+
+            document.getElementById('temprature').innerHTML='<p>'+event.data+'<p>';
+        }catch{
+
+        }
+    });
+
+    // Connection closed
+    socket.addEventListener('close', (event) => {
+        console.log('WebSocket connection closed:', event);
+    });
+
+    // Connection error
+    socket.addEventListener('error', (event) => {
+        console.error('WebSocket error:', event);
+    });
+}
+function getHumiditi(){
+    const socket = new WebSocket('ws://127.0.0.1:8000/ws/humiditi/');  
+    socket.addEventListener('open', (event) => {
+        // console.log('WebSocket connection opened:', event);
+        socket.send("Connect to Server")
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+        // console.log('WebSocket message received:', event.data);
+        try{
+
+            document.getElementById('humiditi').innerHTML='<p>'+event.data+'<p>';
+        }catch{
+
+        }
+    });
+
+    // Connection closed
+    socket.addEventListener('close', (event) => {
+        console.log('WebSocket connection closed:', event);
+    });
+
+    // Connection error
+    socket.addEventListener('error', (event) => {
+        console.error('WebSocket error:', event);
+    });
+}
+// getEquipment();
+function getEquipmentByID(){
+    const socket = new WebSocket('ws://127.0.0.1:8000/ws/equipmentByID/'+window.location.pathname.substring(17));  
+    socket.addEventListener('open', (event) => {
+        // console.log('WebSocket connection opened:', event);
+        socket.send("Connect to Server")
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+        console.log('WebSocket message received:', event.data);
+        try{
+            var equipment = JSON.parse(event.data);
+            var equipmentElement = document.querySelector("#equipment .deviceDetail");
+            var equipmentHtml=`
+                <div class="deviceLabel">
+                <p><i class="fa-solid fa-tv"></i> ${equipment.EquipmentName}</p>
+                </div>`;
+                let equipmentType=equipment['EquipmentType'];
+                if(equipmentType==1){
+                        equipmentHtml+= `<div class="deviceContent">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" ${equipment['StatusActive']=="1"?"checked":""} >
+                                    <span class="toggle-slider"  onclick="changValueEquipment(${equipment['id']},${equipment['StatusActive']=="1"?0:1})"></span>
+                                </label>
+                            </div>`
+                }else if(equipmentType==2){
+    
+                    equipmentHtml+= `<div class="deviceContent">
+                            <label class="toggle-switch">
+                            </label>
+                            <input type="range" id="speedSlider" name="speedSlider" min="0" max="3" step="1" value="${equipment['StatusActive']}"  oninput="changValueEquipment(${equipment['id']},this.value)">                              
+                        </div>`
+                }
+            equipmentElement.innerHTML=equipmentHtml;
+            // document.getElementById('temprature').innerHTML='<p>'+event.data+'<p>';
+        }catch{
+
+        }
+    });
+
+    // Connection closed
+    socket.addEventListener('close', (event) => {
+        console.log('WebSocket connection closed:', event);
+    });
+
+    // Connection error
+    socket.addEventListener('error', (event) => {
+        console.error('WebSocket error:', event);
+    });
+}
+function changValueEquipment(id,value){
+    console.log(value)
+    
+        const xhttp = new XMLHttpRequest();
         xhttp.onload = function() 
         {
-            //lấy dữ liệu dạng json
-            var ResponseJson=xhttp.responseText
-            //chuyển về dữ liệU javascript
-            var Response= JSON.parse(ResponseJson)
-            console.log(Response)
             if(xhttp.status==200)
-            {
-                
-                var s = document.getElementById("equipment");
-                var s1 = '<div class="deviceLabel"><p><i class="fa-solid fa-tv"></i>'+Response.EquipmentName+'</p></div>'
-                s.innerHTML = s1;
-            }
-            else
             {
                
             }
+            else if(xhttp.status=401)
+            {
+                // localStorage.removeItem("Token");
+                // window.location="/Login";
+            }
+            else if(xhttp.status=403)
+            {
+                // localStorage.removeItem("Token");
+                // window.location="/Login";
+            }
         }         
-        //khai báo phương thức và đường dẫn để request
-        xhttp.open("GET", "http://127.0.0.1:8000/ApiV1/HomeByUserID/1",false);
+        const equipment ={
+            StatusActive:value
+        }
+        equipmentJson = JSON.stringify(equipment);
+        xhttp.open("PATCH", "/ApiV1/EquipmentByID/"+id,false);
         //định dạng gửi đi787
         xhttp.setRequestHeader("Content-type","application/json")
-        xhttp.send();
+        xhttp.send(equipmentJson);
+}
+function getAlarm(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+      if (this.status == 200) {
+        const xmlData = this.responseText; // Lấy dữ liệu XML
+        var listRoom = JSON.parse(xmlData);
+        var listRoomHtml='';
+        for(var i=0;i<listRoom.length;i++){
+            listRoomHtml+=`   
+            <div class= "clock" clockid=${listRoom[i]['id']}>
+                <input type="datetime-local" class="timeInput" value=`;
+            var originalDateString = listRoom[i].TimeAction;
+            var dateObject = new Date(originalDateString);
+                
+            listRoomHtml+=`"${dateObject.getFullYear()}-${String(dateObject.getMonth() + 1).padStart(2, '0')}-${String(dateObject.getDate()).padStart(2, '0')}T${String(dateObject.getHours()).padStart(2, '0')}:${String(dateObject.getMinutes()).padStart(2, '0')}"><div class="deviceContent">
+                    <label class="toggle-switch">
+                        <input type="checkbox" ${listRoom[i]['StatusActive']==1?"checked":"" } onclick="deleteClock(${listRoom[i]['id']})">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>`;
+        }
+        var listRoomElement= document.getElementById("alarm");
+        listRoomElement.innerHTML=listRoomHtml;
+      } else if (this.status == 204) {
+      } else if (this.status == 401 || this.status == 403) {
+        // Xử lý khi không có quyền hoặc token không hợp lệ
+        localStorage.removeItem("Token");
+        window.location = "/Admin/Login";
+      } else {
+      }
+    };
+  
+    xhttp.open("GET", "/ApiV1/ClockByID/"+window.location.pathname.substring(17), true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    token = localStorage.getItem("Token");
+    authorization = "Bearer " + token;
+    xhttp.setRequestHeader("Authorization", authorization);
+    xhttp.send();
+}
+var addAlarmButton= document.querySelector('#equipment .addAlarm');
+addAlarmButton.addEventListener('click',()=>{
+    document.getElementById("alarm").innerHTML=`<div class= "clock">
+    <input type="datetime-local" class="timeInput">
+    <div class="deviceContent" >
+        <label class="toggle-switch">
+            <input type="checkbox" onclick="AddClock()">
+            <span class="toggle-slider"></span>
+        </label>
+    </div>
+</div>`+  document.getElementById("alarm").innerHTML;
+})
+
+
+function deleteClock(id){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+      if (this.status == 200) {
+       
+      } else if (this.status == 204) {
+        var elementsWithAhihiAttribute = document.querySelectorAll('[clockid]');
+        for(var i=0;i<elementsWithAhihiAttribute.length;i++){
+            if(elementsWithAhihiAttribute[i].getAttribute('clockid')==id){
+                elementsWithAhihiAttribute[i].parentNode.removeChild(elementsWithAhihiAttribute[i]);
+                break;
+            }
+        }
+      } else if (this.status == 401 || this.status == 403) {
+        // Xử lý khi không có quyền hoặc token không hợp lệ
+        localStorage.removeItem("Token");
+        window.location = "/Admin/Login";
+      } else {
+      }
+    };
+  
+    xhttp.open("DELETE", "/ApiV1/ClockByID/"+id, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    token = localStorage.getItem("Token");
+    authorization = "Bearer " + token;
+    xhttp.setRequestHeader("Authorization", authorization);
+    xhttp.send();
+}
+function AddClock(){
+
+    var TimeAction=event.target.parentNode.parentNode.parentNode.querySelector(':first-child').value;
+    const xhttp = new XMLHttpRequest();
+    
+    const postData={
+        TimeAction:TimeAction,
+        Equipment:window.location.pathname.substring(17),
+        StatusActive:1
+    }
+    const postDataJson = JSON.stringify(postData);
+    xhttp.onload = function () {
+      if (this.status == 201) {
+       
+      } else if (this.status == 400) {
+        getAlarm();
+      } else if (this.status == 401 || this.status == 403) {
+        // Xử lý khi không có quyền hoặc token không hợp lệ
+        localStorage.removeItem("Token");
+        window.location = "/Admin/Login";
+      } else {
+      }
+    };
+  
+    xhttp.open("POST", "/ApiV1/ClockAll", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    token = localStorage.getItem("Token");
+    authorization = "Bearer " + token;
+    xhttp.setRequestHeader("Authorization", authorization);
+    xhttp.send(postDataJson);
 }

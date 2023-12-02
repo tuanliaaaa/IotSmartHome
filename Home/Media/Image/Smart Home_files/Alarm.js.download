@@ -7,7 +7,8 @@ if(localStorage.getItem("Token")){
         RoleList=result;
         const roleNameToCheck = "User";
         if (isRoleNameExist(RoleList, roleNameToCheck)) {
-            getAllEquipment();
+            getEquipmentByID();
+            getAlarm();
             getTemprature();
             getHumiditi();
         } else {
@@ -142,8 +143,9 @@ function getHumiditi(){
         console.error('WebSocket error:', event);
     });
 }
-function getAllEquipment(){
-    const socket = new WebSocket('ws://127.0.0.1:8000/ws/equipment/'+window.location.pathname.substring(17));  
+// getEquipment();
+function getEquipmentByID(){
+    const socket = new WebSocket('ws://127.0.0.1:8000/ws/equipmentByID/'+window.location.pathname.substring(17));  
     socket.addEventListener('open', (event) => {
         // console.log('WebSocket connection opened:', event);
         socket.send("Connect to Server")
@@ -151,57 +153,35 @@ function getAllEquipment(){
 
     // Listen for messages
     socket.addEventListener('message', (event) => {
-        // console.log('WebSocket message received:', event.data);
-        listEquipment =JSON.parse( event.data);
-        console.log(listEquipment);
-        listEquipmentElement=document.getElementById('controlDevice');  
-        listEquipmentHtml=`<div class="controlDevice__header">
-            <h3>Manual Control</h3>
-        </div><div class="controlDevice__deviceList">
-        <ul>`;
-        for(var i=0;i<listEquipment.length;i++){
-            listEquipmentHtml+=` 
-                <li>
-                    <div class="deviceDetail">
-                        <div class="deviceLabel" onclick="EquipmentDetail(${listEquipment[i]['id']})"   >
-                            <p><i class="fa-solid fa-tv"></i> ${listEquipment[i]['EquipmentName']}</p>
-                        </div>
-                        `;
-            let equipmentType=listEquipment[i]['EquipmentType'];
-            if(equipmentType==1){
-                    listEquipmentHtml+= `<div class="deviceContent">
+        console.log('WebSocket message received:', event.data);
+        try{
+            var equipment = JSON.parse(event.data);
+            var equipmentElement = document.querySelector("#equipment .deviceDetail");
+            var equipmentHtml=`
+                <div class="deviceLabel">
+                <p><i class="fa-solid fa-tv"></i> ${equipment.EquipmentName}</p>
+                </div>`;
+                let equipmentType=equipment['EquipmentType'];
+                if(equipmentType==1){
+                        equipmentHtml+= `<div class="deviceContent">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" ${equipment['StatusActive']=="1"?"checked":""} >
+                                    <span class="toggle-slider"  onclick="changValueEquipment(${equipment['id']},${equipment['StatusActive']=="1"?0:1})"></span>
+                                </label>
+                            </div>`
+                }else if(equipmentType==2){
+    
+                    equipmentHtml+= `<div class="deviceContent">
                             <label class="toggle-switch">
-                                <input type="checkbox" ${listEquipment[i]['StatusActive']=="1"?"checked":""} >
-                                <span class="toggle-slider"  onclick="changValueEquipment(${listEquipment[i]['id']},${listEquipment[i]['StatusActive']=="1"?0:1})"></span>
                             </label>
+                            <input type="range" id="speedSlider" name="speedSlider" min="0" max="3" step="1" value="${equipment['StatusActive']}"  oninput="changValueEquipment(${equipment['id']},this.value)">                              
                         </div>`
-            }else if(equipmentType==2){
+                }
+            equipmentElement.innerHTML=equipmentHtml;
+            // document.getElementById('temprature').innerHTML='<p>'+event.data+'<p>';
+        }catch{
 
-                listEquipmentHtml+= `<div class="deviceContent">
-                        <label class="toggle-switch">
-                        </label>
-                        <input type="range" id="speedSlider" name="speedSlider" min="0" max="3" step="1" value="${listEquipment[i]['StatusActive']}"  oninput="changValueEquipment(${listEquipment[i]['id']},this.value)">                              
-                    </div>`
-            }
-            listEquipmentHtml+=`</div></li>`;
         }
-            listEquipmentHtml+=`</ul></div>`;
-        listEquipmentElement.innerHTML=listEquipmentHtml;
-          // Lấy tất cả các nút "toggleSlider"
-        //   const toggleButtons = document.querySelectorAll('.toggle-slider');
-          
-        //   // Lặp qua từng nút và thêm sự kiện click
-        //   toggleButtons.forEach(button => {
-        //       button.addEventListener('click', function() {
-                
-        //           // Tìm thẻ input trước nó
-        //           const previousInput = this.previousElementSibling;
-  
-        //           // Đảo ngược giá trị thuộc tính "checked"
-        //           previousInput.checked = !previousInput.checked;
-        //       });
-        //   });
-        
     });
 
     // Connection closed
@@ -215,35 +195,84 @@ function getAllEquipment(){
     });
 }
 function changValueEquipment(id,value){
-console.log(value)
-
+    console.log(value)
+    
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() 
+        {
+            if(xhttp.status==200)
+            {
+               
+            }
+            else if(xhttp.status=401)
+            {
+                // localStorage.removeItem("Token");
+                // window.location="/Login";
+            }
+            else if(xhttp.status=403)
+            {
+                // localStorage.removeItem("Token");
+                // window.location="/Login";
+            }
+        }         
+        const equipment ={
+            StatusActive:value
+        }
+        equipmentJson = JSON.stringify(equipment);
+        xhttp.open("PATCH", "/ApiV1/EquipmentByID/"+id,false);
+        //định dạng gửi đi787
+        xhttp.setRequestHeader("Content-type","application/json")
+        xhttp.send(equipmentJson);
+}
+function getAlarm(){
     const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() 
-    {
-        if(xhttp.status==200)
-        {
-           
+    xhttp.onload = function () {
+      if (this.status == 200) {
+        const xmlData = this.responseText; // Lấy dữ liệu XML
+        var listRoom = JSON.parse(xmlData);
+        var listRoomHtml='';
+        for(var i=0;i<listRoom.length;i++){
+            listRoomHtml+=`   
+            <div class= "clock">
+                <input type="datetime-local" class="timeInput" value=`;
+            var originalDateString = listRoom[i].TimeAction;
+            var dateObject = new Date(originalDateString);
+                
+            listRoomHtml+=`"${dateObject.getFullYear()}-${String(dateObject.getMonth() + 1).padStart(2, '0')}-${String(dateObject.getDate()).padStart(2, '0')}T${String(dateObject.getHours()).padStart(2, '0')}:${String(dateObject.getMinutes()).padStart(2, '0')}"><div class="deviceContent">
+                    <label class="toggle-switch">
+                        <input type="checkbox" ${listRoom[i]['StatusActive']==1?"checked":""}>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>`;
         }
-        else if(xhttp.status=401)
-        {
-            // localStorage.removeItem("Token");
-            // window.location="/Login";
-        }
-        else if(xhttp.status=403)
-        {
-            // localStorage.removeItem("Token");
-            // window.location="/Login";
-        }
-    }         
-    const equipment ={
-        StatusActive:value
-    }
-    equipmentJson = JSON.stringify(equipment);
-    xhttp.open("PATCH", "/ApiV1/EquipmentByID/"+id,false);
-    //định dạng gửi đi787
-    xhttp.setRequestHeader("Content-type","application/json")
-    xhttp.send(equipmentJson);
+        var listRoomElement= document.getElementById("alarm");
+        listRoomElement.innerHTML=listRoomHtml;
+      } else if (this.status == 204) {
+      } else if (this.status == 401 || this.status == 403) {
+        // Xử lý khi không có quyền hoặc token không hợp lệ
+        localStorage.removeItem("Token");
+        window.location = "/Admin/Login";
+      } else {
+      }
+    };
+  
+    xhttp.open("GET", "/ApiV1/ClockAll", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    token = localStorage.getItem("Token");
+    authorization = "Bearer " + token;
+    xhttp.setRequestHeader("Authorization", authorization);
+    xhttp.send();
 }
-function EquipmentDetail(id){
-    window.location="/EquipmentDetail/"+id;
-}
+var addAlarmButton= document.querySelector('#equipment .addAlarm');
+addAlarmButton.addEventListener('click',()=>{
+    document.getElementById("alarm").innerHTML=`<div class= "clock">
+    <input type="datetime-local" class="timeInput">
+    <div class="deviceContent">
+        <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+        </label>
+    </div>
+</div>`+  document.getElementById("alarm").innerHTML;
+})
