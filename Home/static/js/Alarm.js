@@ -240,10 +240,12 @@ function getAlarm(){
                 
             listRoomHtml+=`"${dateObject.getFullYear()}-${String(dateObject.getMonth() + 1).padStart(2, '0')}-${String(dateObject.getDate()).padStart(2, '0')}T${String(dateObject.getHours()).padStart(2, '0')}:${String(dateObject.getMinutes()).padStart(2, '0')}"><div class="deviceContent">
                     <label class="toggle-switch">
-                        <input type="checkbox" ${listRoom[i]['StatusActive']==1?"checked":"" } onclick="deleteClock(${listRoom[i]['id']})">
+                        <input type="checkbox" ${listRoom[i]['StatusActive']==1?"checked":"" } >
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
+                <div onclick="deleteClock(${listRoom[i]['id']})" class="addClock"> delete</div>
+
             </div>`;
         }
         var listRoomElement= document.getElementById("alarm");
@@ -270,10 +272,11 @@ addAlarmButton.addEventListener('click',()=>{
     <input type="datetime-local" class="timeInput">
     <div class="deviceContent" >
         <label class="toggle-switch">
-            <input type="checkbox" onclick="AddClock()">
+            <input type="checkbox" >
             <span class="toggle-slider"></span>
         </label>
     </div>
+    <div onclick="AddClock()" class="addClock"> post</div>
 </div>`+  document.getElementById("alarm").innerHTML;
 })
 
@@ -308,18 +311,20 @@ function deleteClock(id){
 }
 function AddClock(){
 
-    var TimeAction=event.target.parentNode.parentNode.parentNode.querySelector(':first-child').value;
+    var TimeAction=event.target.parentNode.querySelector(':first-child').value;
+    var Status=event.target.parentNode.querySelector(':nth-child(2)').querySelector('input').checked;
+    Status==true?Status=1:Status=0;
     const xhttp = new XMLHttpRequest();
     
     const postData={
         TimeAction:TimeAction,
         Equipment:window.location.pathname.substring(17),
-        StatusActive:1
+        StatusActive:Status
     }
     const postDataJson = JSON.stringify(postData);
     xhttp.onload = function () {
       if (this.status == 201) {
-       
+        getAlarm();
       } else if (this.status == 400) {
         getAlarm();
       } else if (this.status == 401 || this.status == 403) {

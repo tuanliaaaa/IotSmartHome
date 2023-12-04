@@ -18,6 +18,7 @@ def schedule_api():
 				url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/update/"+equipment.EquipmentKey+"?value="+clock.StatusActive+"&fbclid=IwAR1swiQo5wywsl5hFCw1eIZRc9MkCtlVY0BZ7RgiozCZtp9Pe5Rn_BPtIlk"
 				response = requests.get(url)
 				if response.status_code == 200:
+					print("delete thành conng")
 					clock.delete()
 		except:
 			print("lỗi")

@@ -4,6 +4,7 @@ import asyncio
 import httpx
 from Serializer.EquipmentSerializer import EquipmentSerializer
 from Entity.models.Equipment import Equipment
+from Entity.models.EquipmentAdmin import EquipmentAdmin
 from channels.db import database_sync_to_async
 import json
 
@@ -34,7 +35,7 @@ class EquipmentById(AsyncConsumer):
             serialized_equipment = {
                 'id': equipment.pk,
                 'EquipmentName': equipment.EquipmentName,
-                'EquipmentType': equipment.EquipmentType,
+                'EquipmentType': await self.get_equipmentadmin(equipment.EquipmentAdmin_id),
                 'StatusActive': equipment.StatusActive,
             } 
 
@@ -43,7 +44,7 @@ class EquipmentById(AsyncConsumer):
                 'text': json.dumps(serialized_equipment),
             })
 
-            await asyncio.sleep(1)
+            # await asyncio.sleep(1)
 
     async def websocket_disconnect(self, event):
         print('Ngừng kết nối')
@@ -53,7 +54,10 @@ class EquipmentById(AsyncConsumer):
     def get_equipment(self, id):
         equipment_list = Equipment.objects.get(pk=id)
         return equipment_list
-
+    @database_sync_to_async
+    def get_equipmentadmin(self, id):
+        equipmentadmin = EquipmentAdmin.objects.get(pk=id)
+        return equipmentadmin.EquipmentAdminType
 
 class EquipmentGetAll(AsyncConsumer):
     async def websocket_connect(self, event):
@@ -69,12 +73,13 @@ class EquipmentGetAll(AsyncConsumer):
                 e = await getvalueByEquipmentName(equipment.EquipmentKey)
                 equipment.StatusActive = e
                 await database_sync_to_async(lambda: equipment.save())()
-
+           
             serialized_equipment_list = [{
                 'id': equipment.pk,
                 'EquipmentName': equipment.EquipmentName,
-                'EquipmentType': equipment.EquipmentType,
+                'EquipmentType': await self.get_equipmentadmin(equipment.EquipmentAdmin_id),
                 'StatusActive': equipment.StatusActive,
+      
             } for equipment in equipmentList]
 
             await self.send({
@@ -82,7 +87,7 @@ class EquipmentGetAll(AsyncConsumer):
                 'text': json.dumps(serialized_equipment_list),
             })
 
-            await asyncio.sleep(5)
+            # await asyncio.sleep(1)
 
     async def websocket_disconnect(self, event):
         print('Ngừng kết nối')
@@ -92,3 +97,7 @@ class EquipmentGetAll(AsyncConsumer):
     def get_equipment_list(self, id):
         equipment_list = Equipment.objects.filter(Room__pk=id)
         return list(equipment_list)
+    @database_sync_to_async
+    def get_equipmentadmin(self, id):
+        equipmentadmin = EquipmentAdmin.objects.get(pk=id)
+        return equipmentadmin.EquipmentAdminType
