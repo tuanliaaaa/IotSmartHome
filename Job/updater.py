@@ -1,6 +1,6 @@
 from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
-from .jobs import schedule_api
+from .jobs import schedule_api,Knn
 import threading
 import os
 import csv
@@ -16,6 +16,8 @@ def start():
         rows[0][0] = '0'
         ok= threading.Thread(target=schedule_api)
         ok.start()
+        knn= threading.Thread(target=Knn)
+        knn.start()
         with open(file_path, 'w', newline='') as csvfile:
             csv_writer = csv.writer(csvfile)
             csv_writer.writerows(rows)
