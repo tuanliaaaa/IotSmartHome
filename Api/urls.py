@@ -1,5 +1,5 @@
 from django.urls import path
-from .Views.EquipmentView import EquipmentByRoomId,EquipmentById
+from .Views.EquipmentView import EquipmentByRoomId,EquipmentById,ControllEquipmentByVoice
 from .Views.HomeView import HomeByUserLogin,AllHome,SearchHomeByAdmin,HomeDetailByAdmin
 from .Views.RoomView import RoomByHomeId,AllRoom,SearchRoomByAdmin,RoomDetailByAdmin
 from .Views.Dubao import Recommend
@@ -12,6 +12,7 @@ from .Views.EquipmentAdmView import AllEquipment,SearchEquipmentByAdmin,Equipmen
 from .Views.EquipmentAdminView import AllEquipmentAdmin
 from .Views.SensorView import AllSensor,SearchSensorByAdmin,SensorDetailByAdmin
 from .Views.ClockView import ClockAll,ClockByID
+from .Views.CsvView import CSV
 urlpatterns = [
     path('HomeByUserLogin',HomeByUserLogin.as_view()),
     path('RoomByHomeID/<int:homeID>',RoomByHomeId.as_view()),
@@ -53,6 +54,6 @@ urlpatterns = [
     path('ClockAll',ClockAll.as_view()),
     path('ClockByID/<int:equipmentID>',ClockByID.as_view()),
 
-
-
+    path('CSV',CSV.as_view()),
+    path('ControllEquipmentByVoice',ControllEquipmentByVoice.as_view()),
 ]
