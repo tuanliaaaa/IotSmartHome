@@ -293,6 +293,8 @@ startButton.addEventListener('click',()=>{
         startButton.classList.remove('active');
         const result = event.results[0][0].transcript;
         outputTextFromMic.textContent = `${result}`;
+        remoteByVoice(result);
+
     };
 
     recognition.onerror = (event) => {
@@ -301,3 +303,40 @@ startButton.addEventListener('click',()=>{
     };
 })
 
+function remoteByVoice(command) {
+   
+ 
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if ( xhr.status == 200) {
+            var ResponseJson = xhr.responseText;
+            var Response= JSON.parse(ResponseJson)
+            outputTextFromMic.textContent=Response['message'];
+            
+        }else if(xhr.status==401)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }
+        else if(xhr.status==403)
+        {
+            localStorage.removeItem("Token");
+            window.location="/Login";
+        }else{
+            var ResponseJson = xhr.responseText;
+            var Response= JSON.parse(ResponseJson)
+            outputTextFromMic.textContent=Response['message'];
+
+        }
+    };
+
+    xhr.open('POST', '/ApiV1/ControllEquipmentByVoice', true);
+    xhr.setRequestHeader("Content-type","application/json")
+    token = localStorage.getItem("Token");
+    authorization ='Bearer '+token
+    xhr.setRequestHeader("Authorization",authorization);
+    modeValueJson= JSON.stringify({"command":command});
+    xhr.send(modeValueJson);
+}

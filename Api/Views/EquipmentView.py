@@ -13,7 +13,9 @@ def getvalueByEquipmentName(equipmentName):
 
     with httpx.AsyncClient() as client:
         response =  client.get(url)
+        print(response.status_code )
         if response.status_code == 200:
+            print(response)
             json_data = response.json()
             return json_data[0]
         else:
@@ -83,20 +85,18 @@ class ControllEquipmentByVoice(APIView):
     @method_decorator(RoleRequest(allowedRoles=['User',]))
     def post(self,request):
         label= asyncio.run(getLabel(request.data['command']))
+        print(label)
         equipmentList = Equipment.objects.filter(EquipmentAdmin__EquipmentAdminName=label['equipmentAdmin'],Room__RoomAdmin__RoomAdminName=label['roomAdmin'],Room__Home__User__pk=request.userID)
+        if(len(equipmentList)==0):
+            return Response({"message":"Không có sản phẩm này trong nhà bạn"},status = 404)
         for equipment in equipmentList:
-            print(equipment)
             value=label['value']
             equipment.StatusActive=value
             equipment.save()
             url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/update/"+equipment.EquipmentKey+"?value="+value+"&fbclid=IwAR1swiQo5wywsl5hFCw1eIZRc9MkCtlVY0BZ7RgiozCZtp9Pe5Rn_BPtIlk"
             response = requests.get(url)
 
-            if response.status_code == 200:
+           
                 
-                return Response({"message":f"{request.data['command']} thành công"},status=200)
-            else:
-                print(f"Request failed with status code {response.status_code}")
-                print(response.text)
-                return Response({"message":"khong the thay doi"},status = 400)
+        return Response({"message":f"{request.data['command']} thành công"},status=200)
        
