@@ -9,7 +9,7 @@ import asyncio
 from django.utils.decorators import method_decorator
 from core.roleLoginDecorater import RoleRequest
 def getvalueByEquipmentName(equipmentName):
-    url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/get/" + equipmentName
+    url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/get/"+ equipmentName+"?&fbclid=IwAR1swiQo5wywsl5hFCw1eIZRc9MkCtlVY0BZ7RgiozCZtp9Pe5Rn_BPtIlk"
 
     with httpx.AsyncClient() as client:
         response =  client.get(url)
@@ -71,9 +71,9 @@ class EquipmentById(APIView):
             equipment.save()
             url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/update/"+equipment.EquipmentKey+"?value="+a+"&fbclid=IwAR1swiQo5wywsl5hFCw1eIZRc9MkCtlVY0BZ7RgiozCZtp9Pe5Rn_BPtIlk"
             response = requests.get(url)
-
+            print(url)
             if response.status_code == 200:
-                
+                print(response)
                 return Response(equiupmentUpdateSerializer.data)
             else:
                 print(f"Request failed with status code {response.status_code}")

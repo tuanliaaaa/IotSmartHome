@@ -18,5 +18,10 @@ class EditEquipmentSuperAdmin(View):
 class AddEquipmentSuperAdmin(View):
     def get(self,request):
         return render(request,'AddEquipmentBySuperAdmin.html')
-
+class RoomSuperAdmin(View):
+    def get(self,request):
+        return render(request,'ManagerRoomBySuperAdmin.html')  
+class EditRoomSuperAdmin(View):
+    def get(self,request,RoomAdminID):
+        return render(request,'EditRoomBySuperAdmin.html')  
     

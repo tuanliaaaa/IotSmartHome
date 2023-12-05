@@ -3,7 +3,7 @@ from channels.exceptions import StopConsumer
 import asyncio
 import httpx
 async def getvalueBySensorName(sensorName):
-    url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/get/"+sensorName
+    url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/get/"+ sensorName+"?&fbclid=IwAR1swiQo5wywsl5hFCw1eIZRc9MkCtlVY0BZ7RgiozCZtp9Pe5Rn_BPtIlk"
 
     async with httpx.AsyncClient() as client:
         response = await client.get(url)

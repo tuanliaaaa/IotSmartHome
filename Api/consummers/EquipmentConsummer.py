@@ -9,7 +9,7 @@ from channels.db import database_sync_to_async
 import json
 
 async def getvalueByEquipmentName(equipmentName):
-    url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/get/" + equipmentName
+    url = "http://68.183.236.192/GfqELsw7xlzsGe3hAXnadjsVPxsEiXKe/get/"+ equipmentName+"?&fbclid=IwAR1swiQo5wywsl5hFCw1eIZRc9MkCtlVY0BZ7RgiozCZtp9Pe5Rn_BPtIlk" 
 
     async with httpx.AsyncClient() as client:
         response = await client.get(url)
@@ -44,7 +44,7 @@ class EquipmentById(AsyncConsumer):
                 'text': json.dumps(serialized_equipment),
             })
 
-            # await asyncio.sleep(1)
+            await asyncio.sleep(1)
 
     async def websocket_disconnect(self, event):
         print('Ngừng kết nối')
@@ -87,7 +87,7 @@ class EquipmentGetAll(AsyncConsumer):
                 'text': json.dumps(serialized_equipment_list),
             })
 
-            # await asyncio.sleep(1)
+            await asyncio.sleep(1)
 
     async def websocket_disconnect(self, event):
         print('Ngừng kết nối')
