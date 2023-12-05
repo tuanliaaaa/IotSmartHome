@@ -174,7 +174,7 @@ function getEquipmentByID(){
                     equipmentHtml+= `<div class="deviceContent">
                             <label class="toggle-switch">
                             </label>
-                            <input type="range" id="speedSlider" name="speedSlider" min="0" max="3" step="1" value="${equipment['StatusActive']}"  oninput="changValueEquipment(${equipment['id']},this.value)">                              
+                            <input type="range" id="speedSlider" name="speedSlider" min="1" max="3" step="1" value="${equipment['StatusActive']}"  oninput="changValueEquipment(${equipment['id']},this.value)">                              
                         </div>`
                 }
             equipmentElement.innerHTML=equipmentHtml;
@@ -237,7 +237,7 @@ function getAlarm(){
                 <input type="datetime-local" class="timeInput" value=`;
             var originalDateString = listRoom[i].TimeAction;
             var dateObject = new Date(originalDateString);
-                
+            dateObject.setHours(dateObject.getHours() -7);
             listRoomHtml+=`"${dateObject.getFullYear()}-${String(dateObject.getMonth() + 1).padStart(2, '0')}-${String(dateObject.getDate()).padStart(2, '0')}T${String(dateObject.getHours()).padStart(2, '0')}:${String(dateObject.getMinutes()).padStart(2, '0')}"><div class="deviceContent">
                     <label class="toggle-switch">
                         <input type="checkbox" ${listRoom[i]['StatusActive']==1?"checked":"" } >

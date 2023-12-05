@@ -180,7 +180,7 @@ function getAllEquipment(){
                 listEquipmentHtml+= `<div class="deviceContent">
                         <label class="toggle-switch">
                         </label>
-                        <input type="range" id="speedSlider" name="speedSlider" min="0" max="3" step="1" value="${listEquipment[i]['StatusActive']}"  oninput="changValueEquipment(${listEquipment[i]['id']},this.value)">                              
+                        <input type="range" id="speedSlider" name="speedSlider" min="1" max="3" step="1" value="${listEquipment[i]['StatusActive']}"  oninput="changValueEquipment(${listEquipment[i]['id']},this.value)">                              
                     </div>`
             }
             listEquipmentHtml+=`</div></li>`;
@@ -222,7 +222,7 @@ console.log(value)
     {
         if(xhttp.status==200)
         {
-           
+            history(id,value);
         }
         else if(xhttp.status=401)
         {
@@ -246,4 +246,41 @@ console.log(value)
 }
 function EquipmentDetail(id){
     window.location="/EquipmentDetail/"+id;
+}
+function history(idEquipment,value){
+    var tem = document.querySelector('#temprature p').textContent;
+    var hum = document.querySelector('#humiditi p').textContent;
+    var status = value;
+    const xhttp = new XMLHttpRequest();
+        //nhận dự liệu về (http response)
+        xhttp.onload = function() 
+        {
+            //lấy dữ liệu dạng json
+            var ResponseJson=xhttp.responseText
+            //chuyển về dữ liệU javascript
+            var Response= JSON.parse(ResponseJson)
+            console.log(Response)
+            if(xhttp.status==200)
+            {
+                
+            }
+            else
+            {
+               
+            }
+        }     
+        const history = {
+            StatusActive : status,
+            Temprature : tem,
+            Humidity : hum,
+        }   
+        his = JSON.stringify(history) 
+        //khai báo phương thức và đường dẫn để request
+        xhttp.open("POST", "http://127.0.0.1:8000/ApiV1/history/"+idEquipment,false);
+        //định dạng gửi đi787
+        xhttp.setRequestHeader("Content-type","application/json")
+        token = localStorage.getItem("Token");
+        authorization ='Bearer '+token
+        xhttp.setRequestHeader("Authorization",authorization);
+        xhttp.send(his);
 }

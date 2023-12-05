@@ -44,7 +44,7 @@ class EquipmentById(AsyncConsumer):
                 'text': json.dumps(serialized_equipment),
             })
 
-            await asyncio.sleep(1)
+            # await asyncio.sleep(1)
 
     async def websocket_disconnect(self, event):
         print('Ngừng kết nối')
@@ -87,7 +87,7 @@ class EquipmentGetAll(AsyncConsumer):
                 'text': json.dumps(serialized_equipment_list),
             })
 
-            await asyncio.sleep(1)
+            # await asyncio.sleep(1)
 
     async def websocket_disconnect(self, event):
         print('Ngừng kết nối')

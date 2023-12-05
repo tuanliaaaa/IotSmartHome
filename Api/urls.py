@@ -16,6 +16,7 @@ from .Views.CsvView import CSV
 from .Views.EquipmentSuperAdminView import AllEquipmentSuperAdmin,SearchEquipmentBySuperAdmin,EquipmentDetailBySuperAdmin
 from .Views.RoomSuperAdmin import AllRoomSuperAdmin,SearchRoomBySuperAdmin,RoomDetailBySuperAdmin
 from .Views.UserViewBySuperAdmin import UserDetailBySuperAdmin,AllUserBySuperAdmin,SearchUserBySuperAdmin
+from .Views.HistoryView import HistoryByIdEquipment
 urlpatterns = [
     path('HomeByUserLogin',HomeByUserLogin.as_view()),
     path('RoomByHomeID/<int:homeID>',RoomByHomeId.as_view()),
@@ -73,4 +74,5 @@ urlpatterns = [
     path('AllUserBySuperAdmin',AllUserBySuperAdmin.as_view()),
     path('SearchUserBySuperAdmin/<str:Username>',SearchUserBySuperAdmin.as_view()),
     path('UserDetailBySuperAdmin/<str:UserID>',UserDetailBySuperAdmin.as_view()),
+    path('history/<int:idEquipment>',HistoryByIdEquipment.as_view())
 ]

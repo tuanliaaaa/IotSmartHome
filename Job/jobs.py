@@ -11,7 +11,7 @@ from Entity.models.Mode import Mode
 from django.utils import timezone
 import requests
 import time
-from datetime import datetime
+from datetime import datetime,timedelta
 from django.db import connection
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -23,7 +23,7 @@ from sklearn.metrics import accuracy_score
 def schedule_api():
 	while True:
 		try:
-			current_time = timezone.now()
+			current_time = timezone.now()+ timedelta(hours=7)
 			clockList=Clock.objects.filter(TimeAction__lte=current_time)
 			for clock in clockList:
 				equipment = Equipment.objects.filter(clocks=clock)[0]
