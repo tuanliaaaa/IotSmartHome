@@ -13,6 +13,7 @@ from .Views.EquipmentAdminView import AllEquipmentAdmin
 from .Views.SensorView import AllSensor,SearchSensorByAdmin,SensorDetailByAdmin
 from .Views.ClockView import ClockAll,ClockByID
 from .Views.CsvView import CSV
+from .Views.EquipmentSuperAdminView import AllEquipmentSuperAdmin,SearchEquipmentBySuperAdmin,EquipmentDetailBySuperAdmin
 urlpatterns = [
     path('HomeByUserLogin',HomeByUserLogin.as_view()),
     path('RoomByHomeID/<int:homeID>',RoomByHomeId.as_view()),
@@ -56,4 +57,11 @@ urlpatterns = [
 
     path('CSV',CSV.as_view()),
     path('ControllEquipmentByVoice',ControllEquipmentByVoice.as_view()),
+
+
+    # --------------- SuperAdmin---------------
+    path('AllEquipmentSuperAdmin',AllEquipmentSuperAdmin.as_view()),
+    path('SearchEquipmentBySuperAdmin/<str:EquipmentAdminName>',SearchEquipmentBySuperAdmin.as_view()),
+    path('EquipmentDetailBySuperAdmin/<str:EquipmentAdminID>',EquipmentDetailBySuperAdmin.as_view()),
+
 ]

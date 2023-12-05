@@ -1,50 +1,71 @@
 EquipmentName,Nhãn
 Mở Quạt Phòng Khách ,0
+Bật Quạt Phòng Khách ,0
 Tắt Quạt Phòng Khách ,1
 Mở Quạt Phòng Ngủ,2
+Bật Quạt Phòng Ngủ,2
 Tắt Quạt Phòng Ngủ,3
 Mở Quạt Phòng Bếp,4
+Bật Quạt Phòng Bếp,4
 Tắt Quạt Phòng Bếp,5
 Mở Quạt Phòng Tắm,6
+Bật Quạt Phòng Tắm,6
 Tắt Quạt Phòng Tắm,7
 Mở Quạt Sân,8
+Bật Quạt Sân,8
 Tắt Quạt Sân,9
 Mở Quạt Garage,10
+Bật Quạt Garage,10
 Tắt Quạt Garage,11
 Mở Quạt Bể Bơi,12
+Bật Quạt Bể Bơi,12
 Tắt Quạt Bể Bơi,13
 Mở Đèn Phòng Khách ,14
+Bật Đèn Phòng Khách ,14
 Tắt Đèn Phòng Khách ,15
 Mở Đèn Phòng Ngủ,16
+Bật Đèn Phòng Ngủ,16
 Tắt Đèn Phòng Ngủ,17
 Mở Đèn Phòng Bếp,18
+Bật Đèn Phòng Bếp,18
 Tắt Đèn Phòng Bếp,19
 Mở Đèn Phòng Tắm,20
+Bật Đèn Phòng Tắm,20
 Tắt Đèn Phòng Tắm,21
 Mở Đèn Sân,22
+Bật Đèn Sân,22
 Tắt Đèn Sân,23
 Mở Đèn Garage,24
+Bật Đèn Garage,24
 Tắt Đèn Garage,25
 Mở Đèn Bể Bơi,26
+Bật Đèn Bể Bơi,26
 Tắt Đèn Bể Bơi,27
 Tắt Cổng Phòng Khách ,28
 Mở Cổng Phòng Khách ,29
+Bật Cổng Phòng Khách ,29
 Dừng Cổng Phòng Khách ,30
 Tắt Cổng Phòng Ngủ,31
 Mở Cổng Phòng Ngủ,32
+Bật Cổng Phòng Ngủ,32
 Dừng Cổng Phòng Ngủ,33
 Tắt Cổng Phòng Bếp,34
 Mở Cổng Phòng Bếp,35
+Bật Cổng Phòng Bếp,35
 Dừng Cổng Phòng Bếp,36
 Tắt Cổng Phòng Tắm,37
 Mở Cổng Phòng Tắm,38
+Bật Cổng Phòng Tắm,38
 Dừng Cổng Phòng Tắm,39
 Tắt Cổng Sân,40
 Mở Cổng Sân,41
+Bật Cổng Sân,41
 Dừng Cổng Sân,42
 Tắt Cổng Garage,43
 Mở Cổng Garage,44
+Bật Cổng Garage,44
 Dừng Cổng Garage,45
 Tắt Cổng Bể Bơi,46
 Mở Cổng Bể Bơi,47
+Bật Cổng Bể Bơi,47
 Dừng Cổng Bể Bơi,48

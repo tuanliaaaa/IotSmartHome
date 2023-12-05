@@ -30,18 +30,25 @@ class CSV(APIView):
                 for room in roomAdmin_list:
                     if equipment.EquipmentAdminType == 1:
                         inputOn = "Mở " + equipment.EquipmentAdminName+' '+room.RoomAdminName 
+                        inputOn1 = "Bật " + equipment.EquipmentAdminName+' '+room.RoomAdminName 
                         inputOff = "Tắt " + equipment.EquipmentAdminName+' '+room.RoomAdminName 
                         csv_writer.writerow([inputOn, index])
+                        csv_writer.writerow([inputOn1, index])
+
                         csv_writer.writerow([inputOff, index+1])
                         index += 2
                     if equipment.EquipmentAdminType == 2:
                         inputLv0 = "Tắt " + equipment.EquipmentAdminName+' '+room.RoomAdminName 
                         inputLv1 = "Mở " + equipment.EquipmentAdminName+' '+room.RoomAdminName  
+                        inputLv11 = "Bật " + equipment.EquipmentAdminName+' '+room.RoomAdminName  
+
                         inputLv2 = "Dừng " + equipment.EquipmentAdminName+' '+room.RoomAdminName  
 
 
                         csv_writer.writerow([inputLv0, index])
                         csv_writer.writerow([inputLv1, index+1])
+                        csv_writer.writerow([inputLv11, index+1])
+
                         csv_writer.writerow([inputLv2, index+2])
                         index += 3
 

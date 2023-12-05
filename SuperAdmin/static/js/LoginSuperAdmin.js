@@ -1,6 +1,6 @@
 
 if(localStorage.getItem("Token")){
-    window.location="/SuperAdmin/Equipment";
+    window.location="/SuperAdmin/EquipmentSuperAdmin";
 
 }
 else{
@@ -90,7 +90,7 @@ else{
                 var tokenResponseJson=xhttp.responseText
                 var tokenResponse= JSON.parse(tokenResponseJson)
                 localStorage.setItem("Token", tokenResponse['access']);
-                window.location='/SuperAdmin/Equipment';
+                window.location='/SuperAdmin/EquipmentSuperAdmin';
                 
             }
             else
