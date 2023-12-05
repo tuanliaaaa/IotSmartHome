@@ -25,3 +25,6 @@ class EditRoomSuperAdmin(View):
     def get(self,request,RoomAdminID):
         return render(request,'EditRoomBySuperAdmin.html')  
     
+class EditUserSuperAdmin(View):
+    def get(self,request,UserAdminID):
+        return render(request,'EditUserBySuperAdmin.html')
